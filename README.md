@@ -1,94 +1,124 @@
-# 校园二手交易微信小程序
-校园二手交易微信小程序实现的功能：定位大学，当地天气，轮播图，推荐列表，购物车，发布功能，订单，身份验证等。
-**以下对每一项进行了简单的阐述，“详情”则是对每一项内容具体的描述。**
-## 首页
-首页实现了一些简单的功能，而且界面的设计也不是美观，设计的比较粗糙，后续会完善的功能是：用户下滑加载更多的内容，内容也会更加丰富。
+# 校园二手物品互助服务 Web 系统
+> **全国大学生数字媒体设计大赛参赛作品 · 创新互助应用系统**
 
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/homePage.jpg" width="300" alt="首页"/>
+[![Deploy Status](https://img.shields.io/badge/Deploy-GitHub%20Pages-brightgreen)](https://escoffierzhou.github.io/Secondhand-goods-on-campus/#/)
+[![Framework](https://img.shields.io/badge/Frontend-Vue%203%20%2B%20Vite%205-blue)](https://vuejs.org/)
+[![UI Library](https://img.shields.io/badge/UI-Element%20Plus-409EFF)](https://element-plus.org/)
+[![State](https://img.shields.io/badge/State-Pinia-yellow)](https://pinia.vuejs.org/)
 
-#### 定位
-定位功能调用的是百度的接口，本来是想腾讯地图的，但是自己在使用的过程中，出现了一些错误（后续会完善腾讯地图的使用），导致调用接口失败了，然后才用的[百度地图web端的api](http://lbsyun.baidu.com/index.php?title=jspopular)，而且官方给了代码实例，我们稍作修改即可使用。 [定位详情](https://blog.csdn.net/zyz00000000/article/details/82531397)
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/location.jpg" width="300" alt="定位"/>
+---
 
-#### 天气
-天气功能调用的是百度的接口，在百度地图官网给的代码实例里面除了位置功能，还有当地天气的数据，可以直接拿来使用。[天气详情](https://blog.csdn.net/zyz00000000/article/details/82531397)
+## 一、项目背景与参赛定位
 
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/weather.jpg" width="300" alt="天气"/>
+在高校校园中，每逢毕业季与学期交替，大批专业教材教辅、考研笔记、宿舍小家电（台灯、小电锅）、生活用品（代步单车、置物架）常面临闲置浪费或被低价废品回收的窘境；与此同时，低年级同学对平价二手教材和生活物资存在强烈需求。
 
+本项目旨在为全校师生打造一个**安全、可信、高效、低碳的校园二手物品互助流转平台**：
+- **目标用户**：本校在校本科生、研究生及教职工。
+- **业务核心**：旧书资料循环、闲置数码杂货流转、校园兼职求职互助、失物寻物与求购。
+- **设计初衷**：以数字化媒体交互与前端工程为基石，兼顾学生隐私安全与绿色循环理念。
 
-#### 轮播图
-轮播图直接用微信小程序的组件，&lt;swiper&gt;设置轮播图属性——> &lt;block&gt;循环遍历每一项——> &lt;swiper-item&gt;轮播每一项——> &lt;image&gt;每一项的图片。[详情](https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html)
+🌐 **项目在线评审与体验地址 (GitHub Pages)**：  
+👉 [https://escoffierzhou.github.io/Secondhand-goods-on-campus/#/](https://escoffierzhou.github.io/Secondhand-goods-on-campus/#/)
 
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/swiper.jpg" width="300" alt="轮播效果图"/>
-下面是代码截图：
+---
 
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/swiper1.jpg" width="900" alt="轮播图wxml"/>
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/swiper2.jpg" width="300" alt="轮播图js"/>
+## 二、竞赛赛道功能矩阵
 
-#### 搜索框
-首页的所搜框用的是一张图片，当然这样的搜索框，微信小程序是有组件的,
-[微信小程序的icon组件](https://developers.weixin.qq.com/miniprogram/dev/component/icon.html)
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/search-book.jpg" width="300" alt="搜索框图片"/>
+根据大赛评审标准与业务闭环要求，本系统分为三大核心端态与拓展模块：
 
-#### 滚动条
-我采用引入模板的方式，将这个功能写好后，引入到首页，同样用的&lt;swiper&gt;标签。[详情](https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html)
+```mermaid
+graph TD
+    A["校园二手互助系统"] --> B["学生用户门户 (Web/PC)"]
+    A --> C["管理后台 (Admin)"]
+    A --> D["AI 智能辅助模块 (可扩展)"]
 
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/swiper-y.jpg" width="300" alt="校园头条"/>
-下面是代码截图：
+    B --> B1["用户认证: 校园学号认证 / 体验登录"]
+    B --> B2["闲置流转: 二手图书 / 闲置数码 / 生活用品"]
+    B --> B3["互动交流: 物品留言板 / 站内咨询"]
+    B --> B4["个人中心: 我的发布 / 我的收藏 / 预订记录"]
+    B --> B5["隐私保护: 手机号掩码保护 / 安全面交准则"]
 
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/swiper-y1.jpg" width="800" alt="校园头条wxml"/>
+    C --> C1["物品管理: 违规闲置一键下架"]
+    C --> C2["信息审核: 兼职与留言秩序维护"]
 
+    D --> D1["AI 智能估价: 依据原价、成色自动推荐二手定价"]
+    D --> D2["AI 描述润色: 输入关键词自动生成生动转让文案"]
+```
 
-#### 四个分类功能
-分类功能实现的也比较简单，没有什么技术性的东西，或许wxss样式对你有所帮助。
+### 1. 用户端核心功能
+- **校园身份认证**：支持校园学号实名认证与普通访客体验，严格规范交易主体。
+- **二手物品流转**：
+  - 二手图书专区：包含是否资料教材、作者、出版社、成色笔记标签、校区分类；
+  - 闲置杂货专区：数码配件、寝室家电、单车等分类过滤；
+  - 校园兼职专区：校内勤工助学与家教招募。
+- **物品留言沟通板块**：每个物品详情页下方配备开放式留言沟通区，买卖双方可就成色细节、自提地点进行站内公开答复。
+- **学生个人中心**：
+  - 我的发布：实时管理上架物品，支持随时下架与修改；
+  - 我的收藏：一键收藏心仪物品，便于多方比价与追踪；
+  - 预约面交订单：线上约定校区与时间，线下白天当面验货。
+- **数据与隐私安全设计（重点合规）**：
+  - 符合教育部与数字媒体大赛个人信息保护规范，**手机号等个人联系方式不直接裸露展示**（采用 `138****8888` 掩码脱敏），引导通过站内留言或预约单沟通。
 
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/classify.jpg" width="300" alt="四个分类"/>
+### 2. 运营与管理后台 (Admin)
+- 管理员可实时监控平台物品动态，对不合规、虚假信息或已违规物品执行一键下架与封存。
 
-#### 今日推荐
-今日推荐功能使用了[微信小程序的scroll-view](https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html)，要注意的是，推荐好书和推荐好物在同一个页面，那么当点击“更多”的时候，要跳转到相应内容上。
+### 3. AI 创新拓展亮点 (AI 智能助手)
+- **AI 智能二手估价助手**：根据原价、成色评级（全新/微瑕/较多磨损）及折旧率算法模型，为学生卖家提供科学合理的转让建议价格；
+- **AI 文案生成智能体**：卖家仅需输入简要关键词（如“毕业带不走、只用过两次”），AI 即可一键生成趣味且真实的寝室大甩卖商品描述。
 
-<img src="https://raw.githubusercontent.com/zhuyuzhu/images/master/pictures/recommend.jpg" width="300" alt="今日推荐"/>
+---
 
-## 购物车
-购物车的实现也较为简单，将用户id和商品id传给后端，后端才能把对应的数据给前端。[详情](https://blog.csdn.net/zyz00000000/article/details/82532998)
+## 三、系统技术架构
 
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/shoppingCart.jpg" width="300" alt="购物车"/>
+| 层次 | 选用技术 / 方案 | 设计说明 |
+| :--- | :--- | :--- |
+| **表现层** | Vue 3 + Composition API (`<script setup>`) | 组件高复用、性能轻量、现代响应式驱动 |
+| **UI 设计体系** | Element Plus 2.x + `@element-plus/icons-vue` | 针对桌面端大屏专门排版定制，支持栅格、表单、弹窗 |
+| **状态层** | Pinia | 轻量级状态中心，统一协调用户会话、收藏夹与购物车 |
+| **路由层** | Vue Router 4 (Hash 模式) | 完美消除静态托管（GitHub Pages）子路径刷新 404 隐患 |
+| **数据与存储** | 响应式 LocalStorage 仓储引擎 | 纯静态即可流畅闭环增删改查，开箱即评测，刷新不丢失 |
+| **CI/CD** | GitHub Actions 自动化工作流 | 提交代码自动触发编译并发布至 GitHub Pages |
 
-## 发布
-发布功能，注意一点，必填的内容都填了“发布”按钮才可以点击
+---
 
+## 四、本地运行指南
 
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/release.jpg" width="300" alt="发布功能"/>
+### 环境要求
+- Node.js >= 18.0.0
+- npm >= 9.0.0
 
-## 订单
-订单功能，请求数据，展示数据，没什么难度
+### 快速启动
+#### 方式 1：双击批处理（Windows 用户推荐）
+直接双击根目录下的 [`start-pc-web.bat`](./start-pc-web.bat) 即可全自动拉取依赖并启动。
 
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/order.jpg" width="300" alt="订单管理"/>
+#### 方式 2：命令行启动
+```bash
+# 启动开发服务器
+npm run dev
 
-## 我的
-样式，每一项后面有的" > "是如何实现的呢？
-通过伪元素，transform: matrix()实现>的效果。
+# 浏览器访问：http://localhost:3000/#/
+```
 
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/1.png" width="300" alt="样式"/>
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/2.jpg" width="600" alt="代码"/>
+### 生产打包构建
+```bash
+npm run build
+```
+编译产物位于 `pc-web/dist/` 目录中。
 
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/my.jpg" width="300" alt="个人信息"/>
+---
 
-## 身份验证
-#### 因为需要学校的学生身份才可以使用小程序的功能，这里给出一个测试的账号和密码
-#### 账号：20151621029 密码：666666
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/identityVerify.jpg" width="300" alt="身份验证"/>
+## 五、大赛演示账号与测试数据
 
-### 校园兼职
-#### 用户可以通过小程序，发布兼职信息，发布的兼职信息会在“首页——校园兼职”中，可以在兼职列表中查看兼职的详情
+系统内置预置演示数据集与典型学生账号，方便评委与测试人员即开即测：
+- **测试认证学号**：`20151621029`
+- **认证密码**：`666666`
+- **身份示例**：朱同学（咸安校区 · 计算机与信息工程学院）
+- **数据重置**：顶部状态栏内置“一键重置演示数据”按钮，可随时恢复到初始洁净状态。
 
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/partTimeJob.jpg" width="300" alt="身份验证"/>
+---
 
-#### 当点击“家教老师”这则兼职的时候，会跳转到相应的详情页面
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/parTimeJobDetail.jpg" width="300" alt="身份验证"/>
+## 六、参赛团队分工规划
 
-### 商品详细
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/goodsDetail.jpg" width="300" alt="身份验证"/>
-
-#### 预约购买
-<img src="https://github.com/zhuyuzhu/images/blob/master/pictures/buyGoods.jpg" width="300" alt="身份验证"/>
+- **软件开发 / 架构设计**：系统架构搭建、前端界面开发、数据流转闭环、后台管理。
+- **AI 赋能 / 算法辅助**：二手估价折旧模型设计、文案生成 Prompt 工程、演示视频录制与剪辑。
+- **媒体与视觉设计**：UI 规范定义、主视觉配色、宣传海报与产品交互设计。

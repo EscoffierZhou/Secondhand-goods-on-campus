@@ -51,6 +51,13 @@
               <span>预约与交易订单 ({{ myOrders.length }})</span>
             </div>
             <div
+              :class="['menu-item', { active: activeMenu === 'favorites' }]"
+              @click="activeMenu = 'favorites'"
+            >
+              <el-icon><Star /></el-icon>
+              <span>我的收藏夹 ({{ myFavorites.length }})</span>
+            </div>
+            <div
               :class="['menu-item', { active: activeMenu === 'address' }]"
               @click="activeMenu = 'address'"
             >
@@ -177,7 +184,49 @@
             <el-empty v-else description="您当前暂无任何预约与交易订单" />
           </div>
 
-          <!-- 3. 自提与寝室地址 -->
+          <!-- 3. 我的收藏夹 -->
+          <div v-if="activeMenu === 'favorites'" class="panel-section">
+            <div class="section-top">
+              <h3 class="panel-heading">我的心愿与收藏物品 ({{ myFavorites.length }})</h3>
+              <el-tag type="info">点击物品可直接查看详情或前往留言沟通</el-tag>
+            </div>
+
+            <div v-if="myFavorites.length > 0" class="my-items-list">
+              <div v-for="fav in myFavorites" :key="fav.favoriteId" class="my-item-row">
+                <img :src="fav.picture || './images/tuijian.png'" class="my-item-img" />
+                <div class="my-item-details">
+                  <h4 class="my-item-name" @click="handleGoToDetail(fav)">
+                    <el-tag size="small" :type="fav.type === 'book' ? 'success' : 'warning'" style="margin-right: 6px;">
+                      {{ fav.type === 'book' ? '二手图书' : '闲置好物' }}
+                    </el-tag>
+                    {{ fav.title }}
+                  </h4>
+                  <p class="my-item-desc">
+                    <span>校区：{{ fav.college }}</span>
+                    <span v-if="fav.status" style="margin-left: 10px;">成色：{{ fav.status }}</span>
+                    <span style="margin-left: 10px; color: #94a3b8;">收藏于：{{ fav.savedAt }}</span>
+                  </p>
+                  <span class="price-val" style="color: var(--price-color); font-weight: bold;">
+                    ¥{{ Number(fav.price).toFixed(2) }}
+                  </span>
+                </div>
+                <div class="my-item-actions">
+                  <el-button size="small" type="primary" plain @click="handleGoToDetail(fav)">
+                    查看详情
+                  </el-button>
+                  <el-button size="small" type="danger" plain @click="handleRemoveFavorite(fav.favoriteId)">
+                    移出收藏
+                  </el-button>
+                </div>
+              </div>
+            </div>
+            <el-empty v-else description="您当前暂未收藏任何二手物品，去市场上逛逛吧！">
+              <el-button type="primary" @click="router.push('/books')">去浏览二手教材</el-button>
+              <el-button @click="router.push('/goods')">去发现闲置好物</el-button>
+            </el-empty>
+          </div>
+
+          <!-- 4. 自提与寝室地址 -->
           <div v-if="activeMenu === 'address'" class="panel-section">
             <h3 class="panel-heading">常用自提地点与宿舍</h3>
             <div class="address-box">
@@ -224,13 +273,13 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, onMounted } from 'vue'
+import { ref, computed, reactive, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { Upload, List, Location, Bell } from '@element-plus/icons-vue'
+import { Upload, List, Star, Location, Bell } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useUserStore } from '../stores/user'
 import { useMarketStore } from '../stores/market'
-import { getOrders, updateOrderStatus } from '../services/storage'
+import { getOrders, updateOrderStatus, getFavorites, removeFavorite } from '../services/storage'
 import { INITIAL_NOTICES } from '../mock/initialData'
 
 const router = useRouter()
@@ -240,6 +289,7 @@ const marketStore = useMarketStore()
 const activeMenu = ref('posts')
 const postSubTab = ref('books')
 const ordersList = ref([])
+const favoritesList = ref([])
 
 const addressForm = reactive({
   campus: '咸安校区',
@@ -262,16 +312,49 @@ const myOrders = computed(() => {
   return ordersList.value
 })
 
+const myFavorites = computed(() => {
+  return favoritesList.value
+})
+
 const loadOrders = () => {
   if (userStore.studentId) {
     ordersList.value = getOrders(userStore.studentId)
   }
 }
 
+const loadFavorites = () => {
+  if (userStore.studentId) {
+    favoritesList.value = getFavorites(userStore.studentId)
+  }
+}
+
+const handleRemoveFavorite = (favId) => {
+  removeFavorite(favId)
+  loadFavorites()
+  ElMessage.success('已从收藏夹移出')
+}
+
+const handleGoToDetail = (fav) => {
+  if (fav.type === 'book') {
+    router.push(`/book/${fav.productId}`)
+  } else {
+    router.push(`/good/${fav.productId}`)
+  }
+}
+
 onMounted(() => {
   loadOrders()
+  loadFavorites()
   if (userStore.currentUser?.phone) {
     addressForm.phone = userStore.currentUser.phone
+  }
+})
+
+watch(activeMenu, (newVal) => {
+  if (newVal === 'favorites') {
+    loadFavorites()
+  } else if (newVal === 'orders') {
+    loadOrders()
   }
 })
 

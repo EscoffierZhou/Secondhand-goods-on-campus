@@ -32,26 +32,39 @@
           </span>
         </div>
 
-        <el-button
-          type="primary"
-          size="small"
-          circle
-          :icon="ShoppingCart"
-          class="add-cart-btn"
-          @click.stop="handleAddToCart"
-          title="加入购物车"
-        />
+        <div class="card-btn-group">
+          <el-button
+            :type="isFav ? 'warning' : 'default'"
+            size="small"
+            circle
+            :icon="Star"
+            class="fav-btn"
+            @click.stop="handleToggleFav"
+            :title="isFav ? '已收藏' : '加入收藏'"
+          />
+          <el-button
+            type="primary"
+            size="small"
+            circle
+            :icon="ShoppingCart"
+            class="add-cart-btn"
+            @click.stop="handleAddToCart"
+            title="加入购物车"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { ShoppingCart, User } from '@element-plus/icons-vue'
+import { ShoppingCart, User, Star } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { useCartStore } from '../stores/cart'
+import { useUserStore } from '../stores/user'
+import { isFavorite, toggleFavorite } from '../services/storage'
 
 const props = defineProps({
   item: {
@@ -66,6 +79,32 @@ const props = defineProps({
 
 const router = useRouter()
 const cartStore = useCartStore()
+const userStore = useUserStore()
+
+const isFav = ref(false)
+
+const checkFav = () => {
+  if (userStore.studentId) {
+    const id = props.type === 'book' ? props.item.bookid : props.item.goodid
+    isFav.value = isFavorite(userStore.studentId, id)
+  }
+}
+
+onMounted(checkFav)
+
+const handleToggleFav = () => {
+  if (!userStore.isLoggedIn) {
+    userStore.openAuthDialog()
+    return
+  }
+  const res = toggleFavorite(userStore.studentId, props.item, props.type)
+  isFav.value = res.favorited
+  if (res.favorited) {
+    ElMessage.success(res.message)
+  } else {
+    ElMessage.info(res.message)
+  }
+}
 
 const itemTitle = computed(() => {
   return props.type === 'book' ? props.item.bname : props.item.gname
@@ -241,6 +280,12 @@ const handleAddToCart = () => {
   color: #c0c4cc;
   text-decoration: line-through;
   margin-left: 6px;
+}
+
+.card-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .add-cart-btn {

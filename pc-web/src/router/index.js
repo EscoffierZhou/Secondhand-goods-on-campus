@@ -59,7 +59,13 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: () => import('../views/UserProfileView.vue'),
-    meta: { title: '学生中心 - 校园二手交易平台' }
+    meta: { title: '学生中心 - 校园二手物品互助平台' }
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('../views/AdminView.vue'),
+    meta: { title: '管理后台 - 校园二手物品互助平台' }
   }
 ]
 

@@ -72,10 +72,11 @@
                 </div>
               </div>
               <div class="seller-contact">
-                <span>联系电话：<b>{{ book.phone || '联系卖家面交' }}</b></span>
-                <el-button size="small" link type="primary" @click="copyPhone(book.phone)">
-                  复制电话
-                </el-button>
+                <div class="privacy-phone-row">
+                  <span class="privacy-badge-text"><el-icon><Lock /></el-icon> 隐私保护脱敏：</span>
+                  <span class="masked-phone">{{ maskPhone(book.phone) }}</span>
+                </div>
+                <span class="privacy-sub-hint">满足大赛个人信息保护标准，建议优先在下方留言或发起预约</span>
               </div>
             </div>
 
@@ -87,6 +88,15 @@
 
             <!-- 操作按钮 -->
             <div class="action-buttons">
+              <el-button
+                :type="isFav ? 'danger' : 'default'"
+                size="large"
+                :icon="isFav ? StarFilled : Star"
+                class="fav-btn"
+                @click="handleToggleFav"
+              >
+                {{ isFav ? '已收藏' : '加入收藏' }}
+              </el-button>
               <el-button
                 type="warning"
                 size="large"
@@ -107,6 +117,12 @@
             </div>
           </div>
         </div>
+
+        <!-- 物品留言沟通板块 -->
+        <CommentSection
+          :product-id="String(book.bookid)"
+          :seller-student-id="book.studentId"
+        />
       </div>
 
       <div v-else class="not-found">
@@ -180,12 +196,13 @@
 <script setup>
 import { ref, computed, reactive, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ShoppingCart, CircleCheck } from '@element-plus/icons-vue'
+import { ShoppingCart, CircleCheck, Star, StarFilled, Lock } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
+import CommentSection from '../components/CommentSection.vue'
 import { useMarketStore } from '../stores/market'
 import { useUserStore } from '../stores/user'
 import { useCartStore } from '../stores/cart'
-import { createOrder } from '../services/storage'
+import { createOrder, isFavorite, toggleFavorite } from '../services/storage'
 
 const route = useRoute()
 const router = useRouter()
@@ -195,6 +212,37 @@ const cartStore = useCartStore()
 
 const bookId = computed(() => route.params.id)
 const book = computed(() => marketStore.books.find(b => String(b.bookid) === String(bookId.value)))
+
+const isFav = ref(false)
+
+const maskPhone = (phone) => {
+  if (!phone) return '未留联系电话'
+  const str = String(phone).trim()
+  if (str.length === 11) {
+    return str.substring(0, 3) + '****' + str.substring(7)
+  }
+  return str.substring(0, 2) + '****' + str.slice(-2)
+}
+
+const checkFavStatus = () => {
+  if (userStore.studentId && book.value) {
+    isFav.value = isFavorite(userStore.studentId, book.value.bookid)
+  }
+}
+
+const handleToggleFav = () => {
+  if (!userStore.isLoggedIn) {
+    userStore.openAuthDialog()
+    return
+  }
+  const res = toggleFavorite(userStore.studentId, book.value, 'book')
+  isFav.value = res.favorited
+  if (res.favorited) {
+    ElMessage.success(res.message)
+  } else {
+    ElMessage.info(res.message)
+  }
+}
 
 const reserveDialogVisible = ref(false)
 const reserveLoading = ref(false)
@@ -208,6 +256,7 @@ const reserveForm = reactive({
 })
 
 onMounted(() => {
+  checkFavStatus()
   if (userStore.isLoggedIn) {
     reserveForm.buyerName = userStore.currentUser?.nickName || ''
     reserveForm.buyerPhone = userStore.currentUser?.phone || ''

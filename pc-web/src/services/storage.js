@@ -13,7 +13,9 @@ const STORAGE_KEYS = {
   CART: 'campus_2nd_cart',
   ORDERS: 'campus_2nd_orders',
   USER: 'campus_2nd_user',
-  NOTICES: 'campus_2nd_notices'
+  NOTICES: 'campus_2nd_notices',
+  COMMENTS: 'campus_2nd_comments',
+  FAVORITES: 'campus_2nd_favorites'
 }
 
 // 确保基础数据已加载
@@ -292,3 +294,160 @@ export function createGuestSession() {
     avatarUrl: './images/tabBar/mine.fill.png'
   }
 }
+
+// --- 物品留言板 Comments ---
+export function getComments(productId) {
+  initLocalStorage()
+  try {
+    const all = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS) || '{}')
+    if (!all[productId]) {
+      // 提供针对初始物品的真实问答种子数据
+      all[productId] = [
+        {
+          id: 'cm_1',
+          author: '学弟 (计科系)',
+          authorAvatar: './images/tabBar/mine.fill.png',
+          content: '请问学长，平时上课或期末考试重点都有用荧光笔记号勾选吗？',
+          time: '2天前',
+          reply: '有的，老师考前圈出的核心题型和习题都有详细红笔标注，可以直接复习。'
+        }
+      ]
+      localStorage.setItem(STORAGE_KEYS.COMMENTS, JSON.stringify(all))
+    }
+    return all[productId] || []
+  } catch {
+    return []
+  }
+}
+
+export function addComment(productId, commentData) {
+  initLocalStorage()
+  const all = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS) || '{}')
+  if (!all[productId]) {
+    all[productId] = []
+  }
+  const newComment = {
+    id: 'cm_' + Date.now(),
+    time: '刚刚',
+    reply: '',
+    ...commentData
+  }
+  all[productId].unshift(newComment)
+  localStorage.setItem(STORAGE_KEYS.COMMENTS, JSON.stringify(all))
+  return newComment
+}
+
+export function replyComment(productId, commentId, replyText) {
+  initLocalStorage()
+  const all = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS) || '{}')
+  if (all[productId]) {
+    const target = all[productId].find(c => c.id === commentId)
+    if (target) {
+      target.reply = replyText
+      localStorage.setItem(STORAGE_KEYS.COMMENTS, JSON.stringify(all))
+    }
+  }
+}
+
+// --- 个人收藏 Favorites ---
+export function getFavorites(studentId) {
+  initLocalStorage()
+  try {
+    const all = JSON.parse(localStorage.getItem(STORAGE_KEYS.FAVORITES) || '[]')
+    if (!studentId) return all
+    return all.filter(f => f.studentId === studentId)
+  } catch {
+    return []
+  }
+}
+
+export function isFavorite(studentId, productId) {
+  if (!studentId) return false
+  const list = getFavorites(studentId)
+  return list.some(f => String(f.productId) === String(productId))
+}
+
+export function toggleFavorite(studentId, item, type = 'book') {
+  initLocalStorage()
+  let list = JSON.parse(localStorage.getItem(STORAGE_KEYS.FAVORITES) || '[]')
+  const productId = type === 'book' ? item.bookid : item.goodid
+  const existsIndex = list.findIndex(f => f.studentId === studentId && String(f.productId) === String(productId))
+
+  if (existsIndex >= 0) {
+    list.splice(existsIndex, 1)
+    localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(list))
+    return { favorited: false, message: '已取消收藏' }
+  } else {
+    list.unshift({
+      favoriteId: 'fav_' + Date.now(),
+      studentId,
+      productId,
+      type,
+      title: type === 'book' ? item.bname : item.gname,
+      price: type === 'book' ? item.bprice : item.gprice,
+      picture: type === 'book' ? item.picture : item.gpicture,
+      college: type === 'book' ? item.college : item.gcollege,
+      status: type === 'book' ? item.bstatus : item.gstatus,
+      savedAt: new Date().toLocaleDateString()
+    })
+    localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(list))
+    return { favorited: true, message: '收藏成功！可前往【学生中心-我的收藏】查看' }
+  }
+}
+
+export function removeFavorite(favoriteId) {
+  initLocalStorage()
+  let list = JSON.parse(localStorage.getItem(STORAGE_KEYS.FAVORITES) || '[]')
+  list = list.filter(f => f.favoriteId !== favoriteId)
+  localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(list))
+}
+
+// --- 管理后台 Admin Management ---
+export function getAllItemsForAdmin() {
+  const books = getBooks().map(b => ({
+    id: b.bookid,
+    type: 'book',
+    typeName: '二手图书',
+    title: b.bname,
+    price: b.bprice,
+    seller: b.usersname,
+    studentId: b.studentId,
+    college: b.college,
+    status: b.isBanned ? 'banned' : 'active',
+    createdAt: b.createdAt
+  }))
+
+  const goods = getGoods().map(g => ({
+    id: g.goodid,
+    type: 'good',
+    typeName: '闲置杂货',
+    title: g.gname,
+    price: g.gprice,
+    seller: g.usersname,
+    studentId: g.studentId,
+    college: g.gcollege,
+    status: g.isBanned ? 'banned' : 'active',
+    createdAt: g.createdAt
+  }))
+
+  return [...books, ...goods]
+}
+
+export function updateItemStatus(type, id, status) {
+  if (type === 'book') {
+    const books = getBooks()
+    const target = books.find(b => String(b.bookid) === String(id))
+    if (target) {
+      target.isBanned = status === 'banned'
+      localStorage.setItem(STORAGE_KEYS.BOOKS, JSON.stringify(books))
+    }
+  } else {
+    const goods = getGoods()
+    const target = goods.find(g => String(g.goodid) === String(id))
+    if (target) {
+      target.isBanned = status === 'banned'
+      localStorage.setItem(STORAGE_KEYS.GOODS, JSON.stringify(goods))
+    }
+  }
+}
+

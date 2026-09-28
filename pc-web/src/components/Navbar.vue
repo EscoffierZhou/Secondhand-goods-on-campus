@@ -35,6 +35,12 @@
 
           <span class="divider">|</span>
 
+          <el-button link size="small" type="primary" @click="router.push('/admin')">
+            <el-icon><Management /></el-icon> 管理后台
+          </el-button>
+
+          <span class="divider">|</span>
+
           <template v-if="userStore.isLoggedIn">
             <el-dropdown @command="handleUserMenu">
               <span class="user-profile-badge">
@@ -46,6 +52,7 @@
                 <el-dropdown-menu>
                   <el-dropdown-item command="profile">个人发布 & 订单</el-dropdown-item>
                   <el-dropdown-item command="cart">我的购物车</el-dropdown-item>
+                  <el-dropdown-item command="admin">管理运营中心</el-dropdown-item>
                   <el-dropdown-item command="logout" divided>退出身份认证</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
@@ -70,8 +77,8 @@
             <el-icon :size="24"><Reading /></el-icon>
           </div>
           <div class="logo-text">
-            <span class="brand-title">校园二手交易平台</span>
-            <span class="brand-sub">CAMPUS SECOND-HAND TRADING · 电脑端</span>
+            <span class="brand-title">校园二手物品互助平台</span>
+            <span class="brand-sub">CAMPUS SECOND-HAND MUTUAL AID · 大赛作品</span>
           </div>
         </router-link>
 
@@ -192,7 +199,8 @@ import {
   Briefcase,
   Upload,
   User,
-  Refresh
+  Refresh,
+  Management
 } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import WeatherWidget from './WeatherWidget.vue'
@@ -220,6 +228,8 @@ const handleUserMenu = (cmd) => {
     router.push('/profile')
   } else if (cmd === 'cart') {
     router.push('/cart')
+  } else if (cmd === 'admin') {
+    router.push('/admin')
   } else if (cmd === 'logout') {
     userStore.logout()
     ElMessage.info('已退出学生认证')
