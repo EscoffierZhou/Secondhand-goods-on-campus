@@ -1,0 +1,10 @@
+{
+  "name": "campus-secondhand-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix pc-web run dev",
+    "build": "npm --prefix pc-web run build",
+    "preview": "npm --prefix pc-web run preview"
+  }
+}
