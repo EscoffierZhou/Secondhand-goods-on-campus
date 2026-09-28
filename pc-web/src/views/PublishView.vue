@@ -84,8 +84,9 @@
                   <el-col :span="12">
                     <el-form-item label="所在校区" prop="college">
                       <el-radio-group v-model="bookForm.college">
-                        <el-radio label="咸安校区">咸安校区</el-radio>
-                        <el-radio label="温泉校区">温泉校区</el-radio>
+                        <el-radio label="圣井校区">圣井校区</el-radio>
+                        <el-radio label="燕山校区">燕山校区</el-radio>
+                        <el-radio label="舜耕校区">舜耕校区</el-radio>
                       </el-radio-group>
                     </el-form-item>
                   </el-col>
@@ -200,8 +201,9 @@
                   <el-col :span="10">
                     <el-form-item label="所在校区" prop="gcollege">
                       <el-radio-group v-model="goodForm.gcollege">
-                        <el-radio label="咸安校区">咸安校区</el-radio>
-                        <el-radio label="温泉校区">温泉校区</el-radio>
+                        <el-radio label="圣井校区">圣井校区</el-radio>
+                        <el-radio label="燕山校区">燕山校区</el-radio>
+                        <el-radio label="舜耕校区">舜耕校区</el-radio>
                       </el-radio-group>
                     </el-form-item>
                   </el-col>
@@ -534,8 +536,8 @@ const bookForm = reactive({
   press: '',
   reference: true,
   bstatus: '少量笔记',
-  college: '咸安校区',
-  bprice: 15.00,
+  college: '圣井校区',
+  bprice: 18.00,
   originalPrice: 48.00,
   phone: '',
   picture: './images/tuijian.png',
@@ -555,7 +557,7 @@ const bookRules = {
 // 2. 物品表单
 const goodForm = reactive({
   gname: '',
-  gcollege: '咸安校区',
+  gcollege: '圣井校区',
   gstatus: '八成新',
   gprice: 35.00,
   originalPrice: 99.00,
@@ -575,7 +577,7 @@ const goodRules = {
 const jobForm = reactive({
   title: '',
   workpay: '20 元 / 小时',
-  workplace: '咸安校区',
+  workplace: '圣井校区',
   worktime: '课余空闲时间',
   username: '',
   workcontact: '',

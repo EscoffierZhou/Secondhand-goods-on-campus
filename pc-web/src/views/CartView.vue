@@ -197,12 +197,13 @@
             </el-form-item>
             <el-form-item label="面交校区" required>
               <el-radio-group v-model="checkoutForm.campus">
-                <el-radio label="咸安校区">咸安校区</el-radio>
-                <el-radio label="温泉校区">温泉校区</el-radio>
+                <el-radio label="圣井校区">圣井校区</el-radio>
+                <el-radio label="燕山校区">燕山校区</el-radio>
+                <el-radio label="舜耕校区">舜耕校区</el-radio>
               </el-radio-group>
             </el-form-item>
             <el-form-item label="自提地点" required>
-              <el-input v-model="checkoutForm.meetPlace" placeholder="如：一号教学楼门口、图书馆、二食堂" />
+              <el-input v-model="checkoutForm.meetPlace" placeholder="如：圣井图书馆一楼、燕山三水食堂、舜耕食堂" />
             </el-form-item>
             <el-form-item label="预约时间" required>
               <el-input v-model="checkoutForm.meetTime" placeholder="如：明天中午12:30、课后17:30" />
@@ -249,8 +250,8 @@ const checkoutLoading = ref(false)
 const checkoutForm = reactive({
   buyerName: '',
   buyerPhone: '',
-  campus: '咸安校区',
-  meetPlace: '一号教学楼大厅',
+  campus: '圣井校区',
+  meetPlace: '圣井校区 图书馆一楼大厅',
   meetTime: '明天中午 12:30',
   note: ''
 })

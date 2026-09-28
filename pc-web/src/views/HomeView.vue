@@ -6,7 +6,7 @@
         <div class="hero-left">
           <div class="hero-badge">
             <span class="badge-dot"></span>
-            <span>🌿 校园二手物品绿色循环互助系统 · 数媒设计大赛作品</span>
+            <span>🌱 山东财经大学绿色循环校园 · 官方认证闲置互助平台</span>
           </div>
 
           <h1 class="hero-headline">
@@ -15,7 +15,7 @@
           </h1>
 
           <p class="hero-subtext">
-            专为全校师生打造的轻量化绿色循环互助平台。杜绝线上虚假打款风险，实行严格学籍认证与白天线下安全验货，让知识与善意在校区间自由流转。
+            专为全校师生打造的轻量化绿色循环互助平台。杜绝线上虚假打款风险，实行严格学籍认证与白天线下安全验货，让知识与善意在圣井、燕山、舜耕三校区自由流转。
           </p>
 
           <div class="hero-actions">
@@ -77,7 +77,7 @@
               <span class="strip-icon">📍</span>
               <div class="strip-text">
                 <span class="strip-title">校区面交坐标</span>
-                <span class="strip-sub">食堂/图书馆安全点</span>
+                <span class="strip-sub">三校区安全点</span>
               </div>
             </div>
           </div>
@@ -102,8 +102,8 @@
         </div>
         <div class="metric-sep"></div>
         <div class="metric-block">
-          <span class="metric-num">16+</span>
-          <span class="metric-label">院系双校区覆盖互通</span>
+          <span class="metric-num">3 大校区</span>
+          <span class="metric-label">圣井/燕山/舜耕全覆盖互通</span>
         </div>
       </section>
 
@@ -122,7 +122,7 @@
             </div>
             <div class="portal-content">
               <h3 class="portal-title">二手教材馆</h3>
-              <p class="portal-desc">专业必修教材、同济高数、期末划线重点与考研真题笔记</p>
+              <p class="portal-desc">经管专业教材、计量经济学、微观宏观与考研真题高分笔记</p>
               <span class="portal-link">进入书城选书 →</span>
             </div>
           </div>
@@ -134,7 +134,7 @@
             </div>
             <div class="portal-content">
               <h3 class="portal-title">闲置杂货铺</h3>
-              <p class="portal-desc">宿舍神器、护眼台灯、蓝牙键盘、代步单车与生活小家电</p>
+              <p class="portal-desc">宿舍神器、护眼台灯、蓝牙键盘、圣井代步单车与生活好物</p>
               <span class="portal-link">挑选中意好物 →</span>
             </div>
           </div>
@@ -146,7 +146,7 @@
             </div>
             <div class="portal-content">
               <h3 class="portal-title">求购互助广场</h3>
-              <p class="portal-desc">未找到所需物品？发布求购心愿单，同校学长学姐在线响应</p>
+              <p class="portal-desc">未找到所需物品？发布求购心愿单，三校区学长学姐在线响应</p>
               <span class="portal-link">探索心愿广场 →</span>
             </div>
           </div>
@@ -182,7 +182,7 @@
             </div>
             <div class="portal-content">
               <h3 class="portal-title">安全面交指南</h3>
-              <p class="portal-desc">校区公共区域面交地图、隐私脱敏说明与防骗验货约定</p>
+              <p class="portal-desc">圣井/燕山/舜耕公共区域面交地图、隐私脱敏说明与验货约定</p>
               <span class="portal-link">阅读安全手册 →</span>
             </div>
           </div>
@@ -289,7 +289,7 @@
           <div class="flow-card">
             <div class="flow-index">01</div>
             <h4 class="flow-title">实名学籍认证</h4>
-            <p class="flow-text">仅面向本校学生开放，核验学生身份，远离校外纷杂商业推销。</p>
+            <p class="flow-text">仅面向山东财经大学在读师生开放，核验校园身份，远离校外闲杂人员。</p>
           </div>
           <div class="flow-arrow">→</div>
           <div class="flow-card">
@@ -308,27 +308,27 @@
 
       <!-- 6. 校园互助心声 -->
       <section class="stories-section">
-        <h2 class="sec-title text-center">同学校友的真实流转故事</h2>
+        <h2 class="sec-title text-center">山财大师生的真实流转故事</h2>
         <div class="stories-grid">
           <div class="story-card">
-            <p class="story-quote">“大四考研上岸，把高数和专业课历年笔记挂到平台上，不到半小时就被同院系学弟约下了，希望能帮到他考研！”</p>
+            <p class="story-quote">“大四考研高分上岸，把高数和专业课历年真题笔记挂到平台上，不到半小时就被金融学院学弟约下了，希望能帮到他考研！”</p>
             <div class="story-author">
               <span class="author-name">李学长</span>
-              <span class="author-role">理学院 · 2020级毕业生</span>
+              <span class="author-role">金融学院 · 2020级校友</span>
             </div>
           </div>
           <div class="story-card">
-            <p class="story-quote">“开学急需一本编译原理课本，在求购广场发了一条心愿，当天中午就在一号教学楼大厅从学姐手中拿到了，省了一大半！”</p>
+            <p class="story-quote">“开学急需一本西方经济学课本，在求购广场发了一条心愿，当天中午就在圣井校区博敏楼大厅拿到了，省了一大半！”</p>
             <div class="story-author">
               <span class="author-name">张同学</span>
-              <span class="author-role">计算机系 · 2022级本科生</span>
+              <span class="author-role">经济学院 · 2022级本科生</span>
             </div>
           </div>
           <div class="story-card">
-            <p class="story-quote">“毕业离校行李箱装不下宿舍台灯和小风扇，在平台打包转让给了同楼层学妹，既不浪费又践行了低碳环保。”</p>
+            <p class="story-quote">“毕业离校行李箱装不下宿舍台灯和小风扇，在平台打包转让给了燕山校区同楼层学妹，既不浪费又践行了低碳环保。”</p>
             <div class="story-author">
               <span class="author-name">周同学</span>
-              <span class="author-role">数字媒体艺术系 · 2021级</span>
+              <span class="author-role">计算机科学与技术学院 (数字媒体专业) · 2021级</span>
             </div>
           </div>
         </div>

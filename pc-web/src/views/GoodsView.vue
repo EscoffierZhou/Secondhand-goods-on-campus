@@ -95,7 +95,7 @@ import { useMarketStore } from '../stores/market'
 const route = useRoute()
 const marketStore = useMarketStore()
 
-const campusOptions = ['全部校区', '咸安校区', '温泉校区']
+const campusOptions = ['全部校区', '圣井校区', '燕山校区', '舜耕校区']
 const conditionOptions = [
   '全部成色',
   '全新',

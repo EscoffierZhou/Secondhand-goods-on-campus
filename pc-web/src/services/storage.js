@@ -44,22 +44,22 @@ export function resetAllData() {
         {
           id: 'b_1001',
           type: 'book',
-          title: '高等数学（第七版 上下册合订）',
-          price: 15.00,
-          college: '温泉校区',
+          title: '计量经济学（第五版·配网课课后题详解）',
+          price: 18.00,
+          college: '圣井校区',
           picture: './images/tuijian.png',
-          seller: '李学长 (理学院)',
+          seller: '李学长 (经管学院)',
           sellerPhone: '13871234567'
         }
       ],
-      totalAmount: 15.00,
-      buyerStudentId: '20151621029',
-      buyerName: '朱同学',
+      totalAmount: 18.00,
+      buyerStudentId: '2021081023',
+      buyerName: '周同学',
       buyerPhone: '13888888888',
-      campus: '温泉校区',
-      meetPlace: '一号教学楼大厅',
+      campus: '圣井校区',
+      meetPlace: '圣井校区 图书馆一楼服务大厅',
       meetTime: '明天中午 12:30',
-      note: '下课后在教学楼一楼大厅碰头'
+      note: '下课后在圣井图书馆一楼大厅碰头面交'
     }
   ]))
   localStorage.setItem(STORAGE_KEYS.INIT_FLAG, 'true')
@@ -250,30 +250,48 @@ export function updateOrderStatus(orderId, status) {
 
 // --- 身份验证 Student Auth ---
 export function verifyStudentAccount(studentId, passWord) {
-  // 原项目测试账号
-  if (studentId === '20151621029' && passWord === '666666') {
+  // 山财大主测试账号
+  if (studentId === '2021081023' && passWord === '666666') {
     return {
       success: true,
       user: {
-        studentId: '20151621029',
-        nickName: '朱同学',
-        college: '咸安校区',
-        department: '计算机与信息工程学院',
+        studentId: '2021081023',
+        nickName: '周同学',
+        college: '圣井校区',
+        department: '计算机科学与技术学院 (数字媒体技术)',
+        university: '山东财经大学',
         phone: '13888888888',
         avatarUrl: './images/tabBar/mine.fill.png'
       }
     }
   }
 
-  // 校验11位学号与6位密码规则，支持任意学生体验登录
-  if (/^\d{11}$/.test(studentId) && /^\d{6}$/.test(passWord)) {
+  // 兼容旧版测试账号
+  if (studentId === '20151621029' && passWord === '666666') {
+    return {
+      success: true,
+      user: {
+        studentId: '20151621029',
+        nickName: '周同学',
+        college: '圣井校区',
+        department: '计算机科学与技术学院 (数字媒体技术)',
+        university: '山东财经大学',
+        phone: '13888888888',
+        avatarUrl: './images/tabBar/mine.fill.png'
+      }
+    }
+  }
+
+  // 校验10或11位学号与6位密码规则，支持任意学生体验登录
+  if (/^\d{10,11}$/.test(studentId) && /^\d{6}$/.test(passWord)) {
     return {
       success: true,
       user: {
         studentId: studentId,
-        nickName: '同学_' + studentId.slice(-4),
-        college: '咸安校区',
-        department: '校园认证学子',
+        nickName: '山财大学子_' + studentId.slice(-4),
+        college: '圣井校区',
+        department: '山东财经大学在校认证',
+        university: '山东财经大学',
         phone: '138' + studentId.slice(-8),
         avatarUrl: './images/tabBar/mine.fill.png'
       }
@@ -282,17 +300,18 @@ export function verifyStudentAccount(studentId, passWord) {
 
   return {
     success: false,
-    message: '学号或密码格式不正确（学号为11位数字，密码为6位数字）'
+    message: '学号或密码格式不正确（学号为10-11位数字，密码为6位数字）'
   }
 }
 
 // 快速游客登录模式
 export function createGuestSession() {
   return {
-    studentId: '20151621029',
-    nickName: '朱同学 (演示认证)',
-    college: '咸安校区',
-    department: '计算机与信息工程学院',
+    studentId: '2021081023',
+    nickName: '周同学',
+    college: '圣井校区',
+    department: '计算机科学与技术学院 (数字媒体技术)',
+    university: '山东财经大学',
     phone: '13888888888',
     avatarUrl: './images/tabBar/mine.fill.png'
   }

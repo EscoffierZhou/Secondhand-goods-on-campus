@@ -8,10 +8,10 @@
           <el-breadcrumb-item>校园安全面交与隐私指南</el-breadcrumb-item>
         </el-breadcrumb>
         <div class="hero-content">
-          <div class="hero-tag">🛡️ 大赛合规 · 校园隐私安全与线下互助保障</div>
+          <div class="hero-tag">🛡️ 校园安全保障 · 个人信息保护规范</div>
           <h1 class="hero-title">安全面交约定 · 个人隐私保护规范</h1>
           <p class="hero-desc">
-            平台遵循全国大学生竞赛数据安全合规规范，对所有在校生手机号与学籍进行全程隐私脱敏，倡导“线下白天、校园公共区域、当面验货无误后再结算”的零风险流转原则。
+            平台遵循数据安全与高校信息保护规范，对所有在校生手机号与学籍进行全程隐私脱敏，倡导“线下白天、校园公共区域、当面验货无误后再结算”的零风险流转原则。
           </p>
         </div>
       </div>
@@ -23,7 +23,7 @@
           <div class="step-card">
             <div class="step-num">01</div>
             <h4 class="step-title">学籍互信认证</h4>
-            <p class="step-desc">平台仅对本校在校大学生开放，严格核验学号与校园身份，筑牢源头真实信任基础。</p>
+            <p class="step-desc">平台仅对山东财经大学在读师生开放，严格核验校园身份，筑牢源头真实信任基础。</p>
           </div>
 
           <div class="step-card">
@@ -48,7 +48,7 @@
 
       <!-- 校区推荐面交地点 -->
       <div class="places-section">
-        <h3 class="section-title">📍 两大校区官方推荐安全面交点</h3>
+        <h3 class="section-title">📍 三大校区官方推荐安全面交点</h3>
         <div class="places-grid">
           <div v-for="spot in CAMPUS_SPOTS" :key="spot.name" class="spot-card hover-card">
             <div class="spot-header">
@@ -74,9 +74,9 @@
         <div class="privacy-card">
           <div class="priv-left">
             <div class="priv-icon">🔒</div>
-            <h3 class="priv-title">数据安全与个人隐私保护架构（大赛强制达标项）</h3>
+            <h3 class="priv-title">数据安全与个人隐私保护架构（全程动态脱敏防护）</h3>
             <p class="priv-desc">
-              根据《中华人民共和国数据安全法》及数媒大赛合规规范，本平台对所有涉及学生隐私的字段实施强力脱敏机制，绝不直接将同学手机号与完整敏感学号暴露于公开页面。
+              根据《中华人民共和国数据安全法》及高校合规规范，本平台对所有涉及学生隐私的字段实施强力脱敏机制，绝不直接将同学手机号与完整敏感学籍号暴露于公开页面。
             </p>
           </div>
           <div class="priv-right">
@@ -131,32 +131,46 @@
 <script setup>
 const CAMPUS_SPOTS = [
   {
-    campus: '温泉校区',
-    name: '温泉图书馆一楼正门服务大厅',
-    hours: '08:30 - 21:30 (全天)',
-    location: '图书馆正门旋转门内大理石休息区',
+    campus: '圣井校区',
+    name: '圣井图书馆一楼正门服务大厅',
+    hours: '08:30 - 21:30 (全天开放)',
+    location: '图书馆正门旋转门内大理石休息长椅区',
     tips: '人流密集、中央空调、保安值守，自习课余顺路交易的首选地点。'
   },
   {
-    campus: '温泉校区',
-    name: '学子二食堂一楼面包房门口',
+    campus: '圣井校区',
+    name: '圣井一食堂正门休闲区',
     hours: '11:30 - 13:00 / 17:00 - 18:30',
-    location: '二食堂正门玻璃门内侧休闲桌椅旁',
-    tips: '午餐及晚餐就餐高峰期，买卖双方饭前碰头，方便快捷。'
+    location: '一食堂一楼玻璃门内侧休闲桌椅旁',
+    tips: '午餐及晚餐就餐高峰期，买卖双方饭前碰头交接，方便快捷。'
   },
   {
-    campus: '咸安校区',
-    name: '一号综合教学楼一楼中央连廊',
-    hours: '08:00 - 18:00 (教学作息时段)',
-    location: '一教中庭公告栏长椅旁',
-    tips: '大课间课间休息可快速交接课本资料，监控全方位无盲区。'
+    campus: '圣井校区',
+    name: '博敏教学楼一楼中央天井',
+    hours: '08:00 - 18:00 (教学时段)',
+    location: '博敏楼中庭公告栏休息区',
+    tips: '大课间课间休息可快速交接课本教材，监控全方位无盲区。'
   },
   {
-    campus: '咸安校区',
-    name: '菜鸟驿站与青年公寓门前广场',
-    hours: '12:00 - 19:30',
-    location: '校内快递中心正门口树荫休息长凳',
-    tips: '取快递或宿舍楼下顺路面交，方便检查大件闲置或自行车。'
+    campus: '燕山校区',
+    name: '燕山图书馆大厅与正门台阶',
+    hours: '08:30 - 21:30',
+    location: '燕山校区图书馆一楼大厅服务台旁',
+    tips: '燕山主校区核心地标，光线充足、安全有保障。'
+  },
+  {
+    campus: '燕山校区',
+    name: '燕山三水食堂门前休闲广场',
+    hours: '11:30 - 13:00 / 17:00 - 18:30',
+    location: '三水食堂正门口树荫休息长凳',
+    tips: '就餐高峰期顺路面交，方便检查大件闲置或自行车。'
+  },
+  {
+    campus: '舜耕校区',
+    name: '舜耕校区图书馆门前连廊',
+    hours: '08:30 - 21:30',
+    location: '舜耕图书馆正门连廊休息长椅',
+    tips: '舜耕路校区经典自习点，安保值守，适合安静交接课本。'
   }
 ]
 </script>

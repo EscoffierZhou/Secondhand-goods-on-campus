@@ -8,7 +8,7 @@
           <el-breadcrumb-item>绿色低碳循环展馆</el-breadcrumb-item>
         </el-breadcrumb>
         <div class="hero-content">
-          <div class="hero-tag">🌱 数字媒体与绿色生态创新展厅</div>
+          <div class="hero-tag">🌱 绿色低碳校园 · 闲置循环足迹展厅</div>
           <h1 class="hero-title">校园二手流转 · 守护绿水青山</h1>
           <p class="hero-desc">
             每流转一本二手教材，节约 1.2kg 木材消耗与 2.4kg 工业碳排放；每让一件闲置宿舍好物延续生命，减少一份电子与塑料废弃物。
@@ -137,7 +137,7 @@
       <div class="initiative-card">
         <h3 class="ini-title">📢 毕业季 · “知识传承 · 爱心循环” 绿色倡议</h3>
         <p class="ini-text">
-          大学期间，我们每个人平均购买 35~50 本专业教材与考研参考书。毕业离校时，一本承载批注的高分课本如果当废纸称重变卖，其文化价值被严重稀释。加入校园互助平台，让你的学识与笔记在一届又一届同学手中传递！
+          大学期间，山财大学子平均购买 35~50 本专业教材与考研参考书。毕业离校时，一本承载考研批注与划线重点的经管课本如果当废纸变卖，其文化价值被严重稀释。加入山东财经大学校园互助平台，让你的学识与笔记在圣井、燕山、舜耕三校区同学手中传递！
         </p>
         <div class="ini-actions">
           <el-button type="primary" size="large" @click="router.push('/publish')">立即发布我的闲置教材</el-button>
@@ -175,12 +175,12 @@ const badgeTitle = computed(() => {
 })
 
 const COLLEGE_RANKS = [
-  { name: '计算机与数媒艺术学院', carbon: 1420, percent: 100 },
-  { name: '理学院 / 数学与物理系', carbon: 980, percent: 70 },
-  { name: '电子与信息工程学院', carbon: 840, percent: 60 },
-  { name: '外国语学院', carbon: 650, percent: 46 },
-  { name: '经济与管理学院', carbon: 590, percent: 42 },
-  { name: '医学院 / 护理学院', carbon: 480, percent: 34 }
+  { name: '金融学院', carbon: 1480, percent: 100 },
+  { name: '会计学院', carbon: 1320, percent: 89 },
+  { name: '计算机科学与技术学院 (数字媒体系)', carbon: 1150, percent: 78 },
+  { name: '经济学院', carbon: 960, percent: 65 },
+  { name: '工商管理学院', carbon: 820, percent: 55 },
+  { name: '统计与数学学院', carbon: 710, percent: 48 }
 ]
 
 const handleGenerateCert = () => {

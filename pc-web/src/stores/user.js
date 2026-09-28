@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', {
 
     return {
       currentUser: savedUser || createGuestSession(), // 默认内置快速演示已认证状态
-      currentCampus: localStorage.getItem('campus_2nd_selected_campus') || '咸安校区',
+      currentCampus: localStorage.getItem('campus_2nd_selected_campus') || '圣井校区',
       authDialogOpen: false
     }
   },

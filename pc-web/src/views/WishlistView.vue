@@ -171,8 +171,9 @@
 
           <el-form-item label="面交校区" required>
             <el-radio-group v-model="wantForm.campus">
-              <el-radio label="咸安校区">咸安校区</el-radio>
-              <el-radio label="温泉校区">温泉校区</el-radio>
+              <el-radio label="圣井校区">圣井校区</el-radio>
+              <el-radio label="燕山校区">燕山校区</el-radio>
+              <el-radio label="舜耕校区">舜耕校区</el-radio>
             </el-radio-group>
           </el-form-item>
 
@@ -214,7 +215,7 @@ const marketStore = useMarketStore()
 const userStore = useUserStore()
 
 const categoryOptions = ['全部品类', '专业教材', '考研专区', '数码配件', '宿舍好物', '运动出行']
-const campusOptions = ['全部校区', '温泉校区', '咸安校区']
+const campusOptions = ['全部校区', '圣井校区', '燕山校区', '舜耕校区']
 
 const selectedCat = ref('全部品类')
 const selectedCampus = ref('全部校区')
@@ -225,7 +226,7 @@ const wantForm = reactive({
   title: '',
   category: '专业教材',
   budget: 20,
-  campus: '温泉校区',
+  campus: '圣井校区',
   urgency: '高',
   detail: ''
 })

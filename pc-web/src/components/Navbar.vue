@@ -14,8 +14,9 @@
             </span>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item command="咸安校区">咸安校区</el-dropdown-item>
-                <el-dropdown-item command="温泉校区">温泉校区</el-dropdown-item>
+                <el-dropdown-item command="圣井校区">圣井校区</el-dropdown-item>
+                <el-dropdown-item command="燕山校区">燕山校区</el-dropdown-item>
+                <el-dropdown-item command="舜耕校区">舜耕校区</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -25,22 +26,22 @@
         </div>
 
         <div class="top-right">
-          <!-- 评审指引 Popover -->
+          <!-- 演示指引 Popover -->
           <el-popover placement="bottom-end" :width="320" trigger="hover">
             <template #reference>
               <el-button link size="small" type="primary" class="demo-guide-link">
-                <el-icon><InfoFilled /></el-icon> 评审与演示指引
+                <el-icon><InfoFilled /></el-icon> 演示账号与指引
               </el-button>
             </template>
             <div class="demo-popover-content">
-              <div class="popover-title">💡 全国数媒大赛评审快捷指引</div>
+              <div class="popover-title">💡 平台使用与演示快捷指引</div>
               <p class="popover-desc">
-                纯静态前端架构，零后端零网络依赖，支持 GitHub Pages 全流程评审：
+                本系统支持全流程无缝体验，免配置即开即用：
               </p>
               <div class="popover-meta-box">
                 <div class="popover-kv">
-                  <span class="kv-k">认证学号：</span>
-                  <code class="kv-v">20151621029</code>
+                  <span class="kv-k">演示学号：</span>
+                  <code class="kv-v">2021081023</code>
                 </div>
                 <div class="popover-kv">
                   <span class="kv-k">初始密码：</span>
@@ -81,13 +82,13 @@
               <span class="user-profile-badge">
                 <el-avatar :size="20" src="./images/tabBar/mine.fill.png" class="nav-avatar" />
                 <span class="user-name-text">{{ userStore.nickName }}</span>
-                <el-tag size="small" type="success" effect="light" class="cert-pill">在校认证</el-tag>
+                <el-tag size="small" type="success" effect="light" class="cert-pill">山财大认证</el-tag>
                 <el-icon><ArrowDown /></el-icon>
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item command="profile">个人发布 & 订单</el-dropdown-item>
-                  <el-dropdown-item command="cart">我的购物车</el-dropdown-item>
+                  <el-dropdown-item command="cart">预约清单</el-dropdown-item>
                   <el-dropdown-item command="admin">管理运营中心</el-dropdown-item>
                   <el-dropdown-item command="logout" divided>退出身份认证</el-dropdown-item>
                 </el-dropdown-menu>
@@ -113,8 +114,8 @@
             <el-icon :size="24"><Reading /></el-icon>
           </div>
           <div class="logo-text">
-            <span class="brand-title">校园二手物品互助平台</span>
-            <span class="brand-sub">CAMPUS SECOND-HAND MUTUAL AID · 大赛作品</span>
+            <span class="brand-title">山东财经大学 · 校园二手互助</span>
+            <span class="brand-sub">SDUFE CAMPUS EXCHANGE · 绿色循环平台</span>
           </div>
         </router-link>
 
@@ -122,7 +123,7 @@
         <div class="search-area">
           <el-input
             v-model="searchKeyword"
-            placeholder="搜二手好书、专业教材、单车、数码、求购..."
+            placeholder="搜二手课本、经管教材、单车、数码、求购..."
             class="header-search-input"
             clearable
             @keyup.enter="handleSearch"
@@ -138,10 +139,10 @@
           </el-input>
           <div class="search-hot-tags">
             <span class="hot-label">热门：</span>
-            <a @click="quickSearch('高等数学')">高等数学</a>
-            <a @click="quickSearch('考研英语')">考研英语</a>
-            <a @click="quickSearch('自行车')">自行车</a>
-            <a @click="quickSearch('台灯')">宿舍台灯</a>
+            <a @click="quickSearch('计量经济学')">计量经济学</a>
+            <a @click="quickSearch('西方经济学')">西方经济学</a>
+            <a @click="quickSearch('初级会计')">初级会计</a>
+            <a @click="quickSearch('自行车')">圣井代步车</a>
             <a @click="router.push('/wants')">求购广场</a>
           </div>
         </div>
@@ -170,60 +171,65 @@
       </div>
     </div>
 
-    <!-- 底部主导航条（完整清晰分页面体系） -->
+    <!-- 底部主导航条（完整清晰分页面体系，不换行） -->
     <nav class="nav-bar">
       <div class="pc-container nav-inner">
         <ul class="nav-list">
           <li :class="{ active: currentRoute === '/' }">
             <router-link to="/">
-              <el-icon><House /></el-icon> 门户首页
+              <el-icon><House /></el-icon>
+              <span>首页</span>
             </router-link>
           </li>
           <li :class="{ active: currentRoute === '/books' }">
             <router-link to="/books">
-              <el-icon><Reading /></el-icon> 二手书城
+              <el-icon><Reading /></el-icon>
+              <span>二手书城</span>
             </router-link>
           </li>
           <li :class="{ active: currentRoute === '/goods' }">
             <router-link to="/goods">
-              <el-icon><Goods /></el-icon> 闲置杂货
+              <el-icon><Goods /></el-icon>
+              <span>闲置杂货</span>
             </router-link>
           </li>
           <li :class="{ active: currentRoute === '/wants' }">
             <router-link to="/wants">
-              <el-icon><Opportunity /></el-icon> 求购广场
+              <el-icon><Opportunity /></el-icon>
+              <span>求购广场</span>
             </router-link>
           </li>
           <li :class="{ active: currentRoute === '/jobs' }">
             <router-link to="/jobs">
-              <el-icon><Briefcase /></el-icon> 校园兼职
+              <el-icon><Briefcase /></el-icon>
+              <span>校园兼职</span>
             </router-link>
           </li>
           <li :class="{ active: currentRoute === '/sustainability' }">
             <router-link to="/sustainability">
-              <el-icon><Present /></el-icon> 绿色展馆
+              <el-icon><Present /></el-icon>
+              <span>低碳展馆</span>
             </router-link>
           </li>
           <li :class="{ active: currentRoute === '/guide' }">
             <router-link to="/guide">
-              <el-icon><Guide /></el-icon> 面交指南
+              <el-icon><Guide /></el-icon>
+              <span>面交指南</span>
             </router-link>
           </li>
           <li :class="{ active: currentRoute === '/publish' }">
             <router-link to="/publish">
-              <el-icon><Upload /></el-icon> 发布中心
+              <el-icon><Upload /></el-icon>
+              <span>发布中心</span>
             </router-link>
           </li>
           <li :class="{ active: currentRoute === '/profile' }">
             <router-link to="/profile">
-              <el-icon><User /></el-icon> 学生中心
+              <el-icon><User /></el-icon>
+              <span>学生中心</span>
             </router-link>
           </li>
         </ul>
-
-        <div class="nav-right-tip">
-          <el-tag type="success" size="small" effect="light">纯前端静态运行 · GitHub Pages 实时流转</el-tag>
-        </div>
       </div>
     </nav>
   </header>
@@ -274,8 +280,8 @@ const searchKeyword = ref('')
 const currentRoute = computed(() => route.path)
 
 const quickFillLogin = () => {
-  userStore.login('20151621029', '666666')
-  ElMessage.success('已快捷登录演示账号：周同学')
+  userStore.login('2021081023', '666666')
+  ElMessage.success('已快捷登录演示账号：周同学 (山财大计科院)')
 }
 
 const handleCampusChange = (campus) => {
@@ -604,19 +610,28 @@ const handleResetData = () => {
 .nav-list {
   display: flex;
   list-style: none;
-  gap: 6px;
+  gap: 4px;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list li {
+  flex-shrink: 0;
 }
 
 .nav-list li a {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 16px;
+  padding: 10px 14px;
   font-size: 14px;
   font-weight: 500;
   color: var(--text-regular);
   transition: all 0.2s;
   border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-list li a:hover {

@@ -119,7 +119,7 @@ import { useMarketStore } from '../stores/market'
 const route = useRoute()
 const marketStore = useMarketStore()
 
-const campusOptions = ['全部校区', '咸安校区', '温泉校区']
+const campusOptions = ['全部校区', '圣井校区', '燕山校区', '舜耕校区']
 const conditionOptions = ['全部成色', '全新', '几乎全新', '少量笔记', '较多笔记', '不影响阅读']
 const sortOptions = [
   { label: '最新上架', value: 'newest' },

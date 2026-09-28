@@ -76,7 +76,7 @@
                   <span class="privacy-badge-text"><el-icon><Lock /></el-icon> 隐私保护脱敏：</span>
                   <span class="masked-phone">{{ maskPhone(good.phone) }}</span>
                 </div>
-                <span class="privacy-sub-hint">满足大赛个人信息保护标准，建议优先在下方留言或发起预约</span>
+                <span class="privacy-sub-hint">校园真实学籍安全认证，建议优先在下方留言沟通或提交预约清单</span>
               </div>
             </div>
 
