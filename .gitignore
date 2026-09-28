@@ -1,0 +1,13 @@
+# Node dependencies
+node_modules/
+pc-web/node_modules/
+
+# Build artifacts
+pc-web/dist/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

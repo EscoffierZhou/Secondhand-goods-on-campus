@@ -1,0 +1,119 @@
+:root {
+  --primary-color: #1E68C9;
+  --primary-hover: #1656a8;
+  --primary-light: #eaf2fc;
+  --accent-color: #f56c6c;
+  --price-color: #ff5000;
+  --success-color: #67c23a;
+  --warning-color: #e6a23c;
+  --text-main: #2c3e50;
+  --text-regular: #606266;
+  --text-secondary: #909399;
+  --bg-page: #f4f6fa;
+  --bg-card: #ffffff;
+  --border-color: #e4e7ed;
+  --radius-base: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 8px 24px rgba(30, 104, 201, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pc-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.page-container {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+/* 统一卡片悬浮动效 */
+.hover-card {
+  transition: all 0.25s ease-in-out;
+}
+
+.hover-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover) !important;
+}
+
+/* 价格字体 */
+.price-symbol {
+  font-size: 13px;
+  font-weight: normal;
+  color: var(--price-color);
+}
+
+.price-number {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--price-color);
+  font-family: 'DIN Alternate', 'Helvetica Neue', sans-serif;
+}
+
+/* 页面标题头 */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2f3d;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c5cc;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8abb2;
+}
