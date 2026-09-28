@@ -23,7 +23,25 @@ const routes = [
     path: '/jobs',
     name: 'Jobs',
     component: () => import('../views/JobsView.vue'),
-    meta: { title: '校园兼职 - 校园二手交易平台' }
+    meta: { title: '校园兼职 - 校园二手物品互助平台' }
+  },
+  {
+    path: '/wants',
+    name: 'Wants',
+    component: () => import('../views/WishlistView.vue'),
+    meta: { title: '求购互助广场 - 校园二手物品互助平台' }
+  },
+  {
+    path: '/sustainability',
+    name: 'Sustainability',
+    component: () => import('../views/SustainabilityView.vue'),
+    meta: { title: '绿色低碳展馆 - 校园二手物品互助平台' }
+  },
+  {
+    path: '/guide',
+    name: 'Guide',
+    component: () => import('../views/SafetyGuideView.vue'),
+    meta: { title: '安全面交与隐私指南 - 校园二手物品互助平台' }
   },
   {
     path: '/book/:id',

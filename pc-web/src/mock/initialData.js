@@ -275,3 +275,77 @@ export const INITIAL_NOTICES = [
   { id: 1, title: "关于规范校园二手交易线下安全面交的温馨提示", time: "2024-05-15", content: "建议选择校园公共场所（如食堂、图书馆大厅、各教学楼门口）进行白天当面验货交易，谨防线下虚假转账。" },
   { id: 2, title: "系统公告：电脑端 Web 门户 1.0 正式上线测试", time: "2024-05-18", content: "欢迎同学们体验全新大屏版校园二手交易平台，支持图书、闲置和兼职的发布与预约结算！" }
 ];
+
+export const INITIAL_WANTS = [
+  {
+    wantId: "w_101",
+    title: "急求大二下《编译原理与设计》机械工业出版社教材",
+    category: "专业教材",
+    budget: 20,
+    campus: "温泉校区",
+    urgency: "高",
+    userName: "张同学",
+    college: "计科系",
+    detail: "下周就要开课了，求学长学姐二手转让，最好有期末划线重点或者随堂笔记，温泉校区任意教学楼随叫随到面交！",
+    createdAt: "2024-05-18 09:30",
+    status: "求购中",
+    responses: 3
+  },
+  {
+    wantId: "w_102",
+    title: "求购一辆咸安校区代步山地车或折叠自行车",
+    category: "运动出行",
+    budget: 150,
+    campus: "咸安校区",
+    urgency: "中",
+    userName: "郭同学",
+    college: "机械工程",
+    detail: "从宿舍到实验楼路程较远，求一辆刹车和车胎完好、成色7成新以上的二手自行车，带锁更佳，价格可小刀商量。",
+    createdAt: "2024-05-17 16:45",
+    status: "求购中",
+    responses: 5
+  },
+  {
+    wantId: "w_103",
+    title: "求收考研英语一真题解析黄皮书（近10年）",
+    category: "考研专区",
+    budget: 35,
+    campus: "温泉校区",
+    urgency: "高",
+    userName: "林同学",
+    college: "文学院",
+    detail: "备战考研中，求一套尽量无大面积涂抹答案的真题解析，字迹工整的笔记不介意，附送词汇小册子加分！",
+    createdAt: "2024-05-16 14:10",
+    status: "求购中",
+    responses: 2
+  },
+  {
+    wantId: "w_104",
+    title: "求宿舍多层实木置物架或桌上收纳洞洞板",
+    category: "宿舍好物",
+    budget: 25,
+    campus: "咸安校区",
+    urgency: "低",
+    userName: "宋同学",
+    college: "数媒设计",
+    detail: "桌面东西太多放不下了，求学长毕业转让的桌上置物架或免打孔洞洞板，尺寸约60-80cm均可。",
+    createdAt: "2024-05-15 11:20",
+    status: "已收到",
+    responses: 4
+  },
+  {
+    wantId: "w_105",
+    title: "求收二手罗技静音无线鼠标或便携蓝牙小键盘",
+    category: "数码配件",
+    budget: 40,
+    campus: "温泉校区",
+    urgency: "中",
+    userName: "何同学",
+    college: "经管学院",
+    detail: "图书馆自习室使用需要静音按键，功能正常成色好即可，接收器或蓝牙连接稳定即可。",
+    createdAt: "2024-05-14 20:00",
+    status: "求购中",
+    responses: 1
+  }
+];
+

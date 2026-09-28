@@ -2,7 +2,8 @@ import {
   INITIAL_BOOKS,
   INITIAL_GOODS,
   INITIAL_JOBS,
-  INITIAL_NOTICES
+  INITIAL_NOTICES,
+  INITIAL_WANTS
 } from '../mock/initialData'
 
 const STORAGE_KEYS = {
@@ -10,6 +11,7 @@ const STORAGE_KEYS = {
   BOOKS: 'campus_2nd_books',
   GOODS: 'campus_2nd_goods',
   JOBS: 'campus_2nd_jobs',
+  WANTS: 'campus_2nd_wants',
   CART: 'campus_2nd_cart',
   ORDERS: 'campus_2nd_orders',
   USER: 'campus_2nd_user',
@@ -30,6 +32,7 @@ export function resetAllData() {
   localStorage.setItem(STORAGE_KEYS.BOOKS, JSON.stringify(INITIAL_BOOKS))
   localStorage.setItem(STORAGE_KEYS.GOODS, JSON.stringify(INITIAL_GOODS))
   localStorage.setItem(STORAGE_KEYS.JOBS, JSON.stringify(INITIAL_JOBS))
+  localStorage.setItem(STORAGE_KEYS.WANTS, JSON.stringify(INITIAL_WANTS))
   localStorage.setItem(STORAGE_KEYS.NOTICES, JSON.stringify(INITIAL_NOTICES))
   localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify([]))
   localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify([
@@ -450,4 +453,40 @@ export function updateItemStatus(type, id, status) {
     }
   }
 }
+
+// 求购互助数据管理
+export function getWants() {
+  try {
+    const data = localStorage.getItem(STORAGE_KEYS.WANTS)
+    return data ? JSON.parse(data) : INITIAL_WANTS
+  } catch (e) {
+    return INITIAL_WANTS
+  }
+}
+
+export function addWant(want) {
+  const wants = getWants()
+  const newWant = {
+    wantId: 'w_' + Date.now(),
+    status: '求购中',
+    responses: 0,
+    createdAt: new Date().toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-'),
+    ...want
+  }
+  wants.unshift(newWant)
+  localStorage.setItem(STORAGE_KEYS.WANTS, JSON.stringify(wants))
+  return newWant
+}
+
+export function toggleWantStatus(wantId) {
+  const wants = getWants()
+  const target = wants.find(w => String(w.wantId) === String(wantId))
+  if (target) {
+    target.status = target.status === '求购中' ? '已收到' : '求购中'
+    localStorage.setItem(STORAGE_KEYS.WANTS, JSON.stringify(wants))
+    return target
+  }
+  return null
+}
+
 

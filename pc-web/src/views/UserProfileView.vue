@@ -24,7 +24,9 @@
           <div class="student-card">
             <el-avatar :size="64" src="./images/tabBar/mine.fill.png" class="student-avatar" />
             <h3 class="student-name">{{ userStore.nickName }}</h3>
-            <span class="student-id-badge">学号：{{ userStore.studentId }}</span>
+            <span class="student-id-badge">
+              学籍号：{{ userStore.studentId ? (userStore.studentId.substring(0, 4) + '****' + userStore.studentId.slice(-3)) : '已认证' }} (在校核验)
+            </span>
             <div class="student-dept-text">
               <span>{{ userStore.currentUser?.department || '计算机与信息工程学院' }}</span>
               <span>{{ userStore.currentUser?.college || userStore.currentCampus }}</span>

@@ -68,7 +68,7 @@
                 <el-avatar :size="36" src="./images/tabBar/mine.fill.png" />
                 <div class="seller-meta">
                   <span class="seller-name">{{ good.usersname }}</span>
-                  <span class="seller-cert">学号: {{ good.studentId ? (good.studentId.substring(0, 4) + '****' + good.studentId.slice(-3)) : '已实名认证' }}</span>
+                  <span class="seller-cert">🌟 真实学籍已核验 · {{ good.gcollege }}</span>
                 </div>
               </div>
               <div class="seller-contact">

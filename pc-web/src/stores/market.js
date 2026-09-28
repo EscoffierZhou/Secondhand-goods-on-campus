@@ -8,7 +8,10 @@ import {
   deleteGood,
   getJobs,
   saveJob,
-  deleteJob
+  deleteJob,
+  getWants,
+  addWant,
+  toggleWantStatus
 } from '../services/storage'
 
 export const useMarketStore = defineStore('market', {
@@ -16,6 +19,7 @@ export const useMarketStore = defineStore('market', {
     books: [],
     goods: [],
     jobs: [],
+    wants: [],
     globalSearchKeyword: ''
   }),
 
@@ -24,6 +28,7 @@ export const useMarketStore = defineStore('market', {
       this.books = getBooks()
       this.goods = getGoods()
       this.jobs = getJobs()
+      this.wants = getWants()
     },
 
     publishBook(bookData) {
@@ -57,6 +62,19 @@ export const useMarketStore = defineStore('market', {
     removeJob(jobId) {
       deleteJob(jobId)
       this.loadAll()
+    },
+
+    publishWant(wantData) {
+      const newWant = addWant(wantData)
+      this.loadAll()
+      return newWant
+    },
+
+    toggleWant(wantId) {
+      const res = toggleWantStatus(wantId)
+      this.loadAll()
+      return res
     }
   }
 })
+

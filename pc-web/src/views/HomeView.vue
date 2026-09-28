@@ -1,214 +1,334 @@
 <template>
   <div class="home-view page-container">
     <div class="pc-container">
-      <!-- 顶部 Hero 区域：大屏轮播 + 学生身份卡片 -->
-      <div class="hero-section">
-        <!-- 轮播 Banner -->
-        <div class="hero-banner">
-          <el-carousel trigger="click" height="340px" class="banner-carousel">
-            <el-carousel-item v-for="item in INITIAL_BANNERS" :key="item.id">
-              <div class="banner-slide" @click="handleBannerClick(item.link)">
-                <img :src="item.image" :alt="item.title" class="banner-img" />
-                <div class="banner-overlay">
-                  <h2 class="banner-title">{{ item.title }}</h2>
-                  <p class="banner-subtitle">{{ item.subtitle }}</p>
+      <!-- 1. 先锋展示 Hero 区域：高质感视觉 + 呼吸感排版 -->
+      <section class="hero-showcase">
+        <div class="hero-left">
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span>🌿 校园二手物品绿色循环互助系统 · 数媒设计大赛作品</span>
+          </div>
+
+          <h1 class="hero-headline">
+            让课本传承温度<br />
+            让闲置重获新生
+          </h1>
+
+          <p class="hero-subtext">
+            专为全校师生打造的轻量化绿色循环互助平台。杜绝线上虚假打款风险，实行严格学籍认证与白天线下安全验货，让知识与善意在校区间自由流转。
+          </p>
+
+          <div class="hero-actions">
+            <el-button type="primary" size="large" class="primary-hero-btn" @click="router.push('/books')">
+              📚 探索二手书城
+            </el-button>
+            <el-button size="large" class="secondary-hero-btn" @click="router.push('/goods')">
+              🎁 淘闲置杂货
+            </el-button>
+            <el-button size="large" class="secondary-hero-btn" @click="router.push('/wants')">
+              🙋 发布求购需求
+            </el-button>
+          </div>
+
+          <div class="hero-highlights">
+            <div class="hl-item">
+              <el-icon color="#10b981"><CircleCheckFilled /></el-icon>
+              <span>100% 在校实名验真</span>
+            </div>
+            <div class="hl-item">
+              <el-icon color="#10b981"><CircleCheckFilled /></el-icon>
+              <span>线下公共区域当面核验</span>
+            </div>
+            <div class="hl-item">
+              <el-icon color="#10b981"><CircleCheckFilled /></el-icon>
+              <span>全程个人隐私强力脱敏</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧：精美轮播与循环动态展板 -->
+        <div class="hero-right">
+          <div class="banner-wrapper">
+            <el-carousel trigger="click" height="300px" class="showcase-carousel">
+              <el-carousel-item v-for="item in INITIAL_BANNERS" :key="item.id">
+                <div class="banner-slide" @click="router.push(item.link)">
+                  <img :src="item.image" :alt="item.title" class="banner-img" />
+                  <div class="banner-glass-overlay">
+                    <span class="slide-tag">重点推荐</span>
+                    <h3 class="slide-title">{{ item.title }}</h3>
+                    <p class="slide-sub">{{ item.subtitle }}</p>
+                  </div>
                 </div>
-              </div>
-            </el-carousel-item>
-          </el-carousel>
-        </div>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
 
-        <!-- 右侧个人快捷卡片与快捷服务 -->
-        <div class="hero-sidebar">
-          <div class="user-quick-card">
-            <div class="card-avatar-box">
-              <el-avatar :size="54" src="./images/tabBar/mine.fill.png" />
-              <div class="user-greeting">
-                <span class="greeting-text">
-                  {{ userStore.isLoggedIn ? userStore.nickName : '欢迎来到校园二手' }}
-                </span>
-                <span class="student-id-text">
-                  {{ userStore.isLoggedIn ? `学号: ${userStore.studentId}` : '认证后解锁完整功能' }}
-                </span>
+          <!-- 快捷操作小药丸条 -->
+          <div class="quick-access-strip">
+            <div class="strip-item" @click="router.push('/sustainability')">
+              <span class="strip-icon">🌱</span>
+              <div class="strip-text">
+                <span class="strip-title">低碳足迹测算</span>
+                <span class="strip-sub">查看全校减碳成果</span>
               </div>
             </div>
-
-            <div class="quick-status-row">
-              <div class="status-item" @click="router.push('/profile')">
-                <span class="status-num">{{ myPublishedCount }}</span>
-                <span class="status-label">我的发布</span>
-              </div>
-              <div class="status-item" @click="router.push('/profile')">
-                <span class="status-num">{{ myOrdersCount }}</span>
-                <span class="status-label">预约订单</span>
-              </div>
-              <div class="status-item" @click="router.push('/cart')">
-                <span class="status-num">{{ cartStore.totalCount }}</span>
-                <span class="status-label">购物车</span>
+            <div class="strip-divider"></div>
+            <div class="strip-item" @click="router.push('/guide')">
+              <span class="strip-icon">📍</span>
+              <div class="strip-text">
+                <span class="strip-title">校区面交坐标</span>
+                <span class="strip-sub">食堂/图书馆安全点</span>
               </div>
             </div>
-
-            <div class="quick-btn-box">
-              <el-button
-                v-if="!userStore.isLoggedIn"
-                type="primary"
-                class="full-btn"
-                @click="userStore.openAuthDialog"
-              >
-                学生身份认证 / 登录
-              </el-button>
-              <el-button
-                v-else
-                type="primary"
-                class="full-btn"
-                @click="router.push('/publish')"
-              >
-                + 快速发布二手闲置
-              </el-button>
-            </div>
           </div>
-
-          <!-- 校园保障公告卡片 -->
-          <div class="safety-card">
-            <div class="card-header-small">
-              <el-icon color="#e6a23c"><Bell /></el-icon>
-              <span>绿色校园交易准则</span>
-            </div>
-            <p class="card-desc">
-              本系统严格采用学生学号认证体系，为校园同学提供课本资料循环与旧物转让保障，线下白天当面验货。
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 校园头条滚动公告跑马灯 -->
-      <div class="headline-bar">
-        <div class="headline-tag">
-          <img :src="'./images/toutiao.png'" alt="头条" class="toutiao-icon" />
-          <span>校园头条</span>
-        </div>
-        <div class="headline-content">
-          <el-carousel height="36px" direction="vertical" :autoplay="true" :interval="4000" indicator-position="none">
-            <el-carousel-item v-for="item in INITIAL_HEADLINES" :key="item.id">
-              <div class="headline-item">
-                <span class="headline-badge">最新</span>
-                <span class="headline-text">{{ item.title }}</span>
-                <span class="headline-date">{{ item.date }}</span>
-              </div>
-            </el-carousel-item>
-          </el-carousel>
-        </div>
-      </div>
-
-      <!-- 四大快捷金刚入口 -->
-      <div class="category-grid">
-        <div class="category-card hover-card" @click="router.push('/books')">
-          <div class="cat-icon-box cat-book">
-            <el-icon :size="26"><Reading /></el-icon>
-          </div>
-          <div class="cat-info">
-            <h4 class="cat-title">二手书店</h4>
-            <p class="cat-desc">考研专业教材 · 高分笔记资料</p>
-          </div>
-        </div>
-
-        <div class="category-card hover-card" @click="router.push('/goods')">
-          <div class="cat-icon-box cat-good">
-            <el-icon :size="26"><Goods /></el-icon>
-          </div>
-          <div class="cat-info">
-            <h4 class="cat-title">闲置杂货</h4>
-            <p class="cat-desc">数码配件 · 宿舍小家电 · 自行车</p>
-          </div>
-        </div>
-
-        <div class="category-card hover-card" @click="router.push('/jobs')">
-          <div class="cat-icon-box cat-job">
-            <el-icon :size="26"><Briefcase /></el-icon>
-          </div>
-          <div class="cat-info">
-            <h4 class="cat-title">校园兼职</h4>
-            <p class="cat-desc">图书馆助理 · 家教 · 勤工助学</p>
-          </div>
-        </div>
-
-        <div class="category-card hover-card" @click="router.push('/publish')">
-          <div class="cat-icon-box cat-pub">
-            <el-icon :size="26"><Upload /></el-icon>
-          </div>
-          <div class="cat-info">
-            <h4 class="cat-title">我要发布</h4>
-            <p class="cat-desc">毕业大甩卖 · 一键快速转让</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 今日好书推荐 (Book Section) -->
-      <section class="market-section">
-        <div class="section-header">
-          <div class="section-title">今日好书推荐 (二手图书专区)</div>
-          <el-button link type="primary" @click="router.push('/books')">
-            查看更多图书 <el-icon><ArrowRight /></el-icon>
-          </el-button>
-        </div>
-
-        <div class="product-grid">
-          <ProductCard
-            v-for="book in topBooks"
-            :key="book.bookid"
-            :item="book"
-            type="book"
-          />
         </div>
       </section>
 
-      <!-- 精选闲置好物推荐 (Goods Section) -->
-      <section class="market-section">
-        <div class="section-header">
-          <div class="section-title">精选闲置好物 (宿舍生活与数码)</div>
-          <el-button link type="primary" @click="router.push('/goods')">
-            查看更多物品 <el-icon><ArrowRight /></el-icon>
-          </el-button>
+      <!-- 2. 全校循环宏观数据仪表盘 (Metrics Bar) -->
+      <section class="metrics-bar">
+        <div class="metric-block">
+          <span class="metric-num">3,850+</span>
+          <span class="metric-label">册课本资料流转传承</span>
         </div>
-
-        <div class="product-grid">
-          <ProductCard
-            v-for="good in topGoods"
-            :key="good.goodid"
-            :item="good"
-            type="good"
-          />
+        <div class="metric-sep"></div>
+        <div class="metric-block">
+          <span class="metric-num">4,960+</span>
+          <span class="metric-label">kg 累计减少工业碳排</span>
+        </div>
+        <div class="metric-sep"></div>
+        <div class="metric-block">
+          <span class="metric-num">100%</span>
+          <span class="metric-label">本校在读学籍实名核验</span>
+        </div>
+        <div class="metric-sep"></div>
+        <div class="metric-block">
+          <span class="metric-num">16+</span>
+          <span class="metric-label">院系双校区覆盖互通</span>
         </div>
       </section>
 
-      <!-- 校园兼职速递 (Jobs Section) -->
-      <section class="market-section">
-        <div class="section-header">
-          <div class="section-title">校园兼职与勤工助学速递</div>
-          <el-button link type="primary" @click="router.push('/jobs')">
-            查看全部职位 <el-icon><ArrowRight /></el-icon>
-          </el-button>
+      <!-- 3. 六大核心专区传送门（明确分流，稀释信息架构） -->
+      <section class="portals-section">
+        <div class="section-title-box">
+          <h2 class="sec-title">核心业务专区 · 一键直达</h2>
+          <p class="sec-subtitle">分门别类的高校流转专区，根据你的需求直达独立页面</p>
         </div>
 
-        <div class="jobs-row-grid">
-          <div
-            v-for="job in topJobs"
-            :key="job.jobid"
-            class="job-card hover-card"
-            @click="router.push(`/job/${job.jobid}`)"
-          >
-            <div class="job-header">
-              <h4 class="job-title">{{ job.title }}</h4>
-              <span class="job-pay">{{ job.workpay }}</span>
+        <div class="portals-grid">
+          <!-- 1. 二手教材馆 -->
+          <div class="portal-card hover-card" @click="router.push('/books')">
+            <div class="portal-icon-bg icon-bg-blue">
+              <el-icon :size="26"><Reading /></el-icon>
             </div>
-            <div class="job-meta">
-              <span><el-icon><Location /></el-icon> {{ job.workplace }}</span>
-              <span><el-icon><Clock /></el-icon> {{ job.worktime }}</span>
+            <div class="portal-content">
+              <h3 class="portal-title">二手教材馆</h3>
+              <p class="portal-desc">专业必修教材、同济高数、期末划线重点与考研真题笔记</p>
+              <span class="portal-link">进入书城选书 →</span>
             </div>
-            <p class="job-req">{{ job.workrequirement }}</p>
-            <div class="job-footer">
-              <span class="job-poster">发布者：{{ job.username }}</span>
-              <el-button size="small" type="primary" plain>查看详情</el-button>
+          </div>
+
+          <!-- 2. 闲置杂货铺 -->
+          <div class="portal-card hover-card" @click="router.push('/goods')">
+            <div class="portal-icon-bg icon-bg-emerald">
+              <el-icon :size="26"><Goods /></el-icon>
+            </div>
+            <div class="portal-content">
+              <h3 class="portal-title">闲置杂货铺</h3>
+              <p class="portal-desc">宿舍神器、护眼台灯、蓝牙键盘、代步单车与生活小家电</p>
+              <span class="portal-link">挑选中意好物 →</span>
+            </div>
+          </div>
+
+          <!-- 3. 求购互助广场 -->
+          <div class="portal-card hover-card" @click="router.push('/wants')">
+            <div class="portal-icon-bg icon-bg-orange">
+              <el-icon :size="26"><Opportunity /></el-icon>
+            </div>
+            <div class="portal-content">
+              <h3 class="portal-title">求购互助广场</h3>
+              <p class="portal-desc">未找到所需物品？发布求购心愿单，同校学长学姐在线响应</p>
+              <span class="portal-link">探索心愿广场 →</span>
+            </div>
+          </div>
+
+          <!-- 4. 勤工助学兼职 -->
+          <div class="portal-card hover-card" @click="router.push('/jobs')">
+            <div class="portal-icon-bg icon-bg-purple">
+              <el-icon :size="26"><Briefcase /></el-icon>
+            </div>
+            <div class="portal-content">
+              <h3 class="portal-title">校园兼职速递</h3>
+              <p class="portal-desc">图书馆自习室助管、校外周末家教、课余勤工助学真实岗位</p>
+              <span class="portal-link">查看兼职岗位 →</span>
+            </div>
+          </div>
+
+          <!-- 5. 绿色低碳展馆 -->
+          <div class="portal-card hover-card" @click="router.push('/sustainability')">
+            <div class="portal-icon-bg icon-bg-teal">
+              <el-icon :size="26"><Present /></el-icon>
+            </div>
+            <div class="portal-content">
+              <h3 class="portal-title">绿色低碳展馆</h3>
+              <p class="portal-desc">测算个人减碳足迹，查看各学院低碳排行榜与绿色流转先锋</p>
+              <span class="portal-link">测算减碳积分 →</span>
+            </div>
+          </div>
+
+          <!-- 6. 安全面交指南 -->
+          <div class="portal-card hover-card" @click="router.push('/guide')">
+            <div class="portal-icon-bg icon-bg-indigo">
+              <el-icon :size="26"><Guide /></el-icon>
+            </div>
+            <div class="portal-content">
+              <h3 class="portal-title">安全面交指南</h3>
+              <p class="portal-desc">校区公共区域面交地图、隐私脱敏说明与防骗验货约定</p>
+              <span class="portal-link">阅读安全手册 →</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 精选流转 · 发现好物 (Curated Picks - 仅精选 4 个卡片，杜绝密集) -->
+      <section class="featured-section">
+        <div class="featured-header">
+          <div>
+            <h2 class="sec-title">精选好物 · 灵感流转</h2>
+            <p class="sec-subtitle">全校热度最高、成色最好的优质转让与求购</p>
+          </div>
+
+          <div class="featured-tabs">
+            <button
+              :class="['tab-btn', { active: activeTab === 'books' }]"
+              @click="activeTab = 'books'"
+            >
+              📚 热门高分教材
+            </button>
+            <button
+              :class="['tab-btn', { active: activeTab === 'goods' }]"
+              @click="activeTab = 'goods'"
+            >
+              💻 数码宿舍生活
+            </button>
+            <button
+              :class="['tab-btn', { active: activeTab === 'wants' }]"
+              @click="activeTab = 'wants'"
+            >
+              🙋 最新同学求购
+            </button>
+          </div>
+        </div>
+
+        <!-- 图书 Tab -->
+        <div v-if="activeTab === 'books'" class="product-gallery">
+          <div class="product-grid">
+            <ProductCard
+              v-for="book in topBooks"
+              :key="book.bookid"
+              :item="book"
+              type="book"
+            />
+          </div>
+          <div class="view-more-row">
+            <el-button size="large" plain @click="router.push('/books')">
+              查看全部 {{ marketStore.books.length }} 本二手图书与教材资料 <el-icon><ArrowRight /></el-icon>
+            </el-button>
+          </div>
+        </div>
+
+        <!-- 杂货 Tab -->
+        <div v-else-if="activeTab === 'goods'" class="product-gallery">
+          <div class="product-grid">
+            <ProductCard
+              v-for="good in topGoods"
+              :key="good.goodid"
+              :item="good"
+              type="good"
+            />
+          </div>
+          <div class="view-more-row">
+            <el-button size="large" plain @click="router.push('/goods')">
+              查看全部 {{ marketStore.goods.length }} 件闲置杂货好物 <el-icon><ArrowRight /></el-icon>
+            </el-button>
+          </div>
+        </div>
+
+        <!-- 求购 Tab -->
+        <div v-else class="product-gallery">
+          <div class="home-wants-grid">
+            <div
+              v-for="want in topWants"
+              :key="want.wantId"
+              class="home-want-card hover-card"
+              @click="router.push('/wants')"
+            >
+              <div class="hw-top">
+                <el-tag size="small" type="danger" effect="plain">{{ want.category }}</el-tag>
+                <span class="hw-budget">期望 ¥{{ want.budget }}</span>
+              </div>
+              <h4 class="hw-title">{{ want.title }}</h4>
+              <p class="hw-desc">{{ want.detail }}</p>
+              <div class="hw-bottom">
+                <span class="hw-user">{{ want.userName }} · {{ want.campus }}</span>
+                <span class="hw-action">去响应求购 →</span>
+              </div>
+            </div>
+          </div>
+          <div class="view-more-row">
+            <el-button size="large" plain @click="router.push('/wants')">
+              进入求购广场查看全部心愿单 <el-icon><ArrowRight /></el-icon>
+            </el-button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. 极简 3 步安全面交流程 -->
+      <section class="flow-section">
+        <h2 class="sec-title text-center">三步完成一次温情的校园闲置互助</h2>
+        <div class="flow-cards-row">
+          <div class="flow-card">
+            <div class="flow-index">01</div>
+            <h4 class="flow-title">实名学籍认证</h4>
+            <p class="flow-text">仅面向本校学生开放，核验学生身份，远离校外纷杂商业推销。</p>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-card">
+            <div class="flow-index">02</div>
+            <h4 class="flow-title">线上预约锁定</h4>
+            <p class="flow-text">选中心仪课本或闲置物，一键提交面交预约清单，无需线上打款付款。</p>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-card">
+            <div class="flow-index">03</div>
+            <h4 class="flow-title">线下白天面交</h4>
+            <p class="flow-text">在食堂或教学楼公共区域碰头，当面验货满意后再扫码或现金结算。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. 校园互助心声 -->
+      <section class="stories-section">
+        <h2 class="sec-title text-center">同学校友的真实流转故事</h2>
+        <div class="stories-grid">
+          <div class="story-card">
+            <p class="story-quote">“大四考研上岸，把高数和专业课历年笔记挂到平台上，不到半小时就被同院系学弟约下了，希望能帮到他考研！”</p>
+            <div class="story-author">
+              <span class="author-name">李学长</span>
+              <span class="author-role">理学院 · 2020级毕业生</span>
+            </div>
+          </div>
+          <div class="story-card">
+            <p class="story-quote">“开学急需一本编译原理课本，在求购广场发了一条心愿，当天中午就在一号教学楼大厅从学姐手中拿到了，省了一大半！”</p>
+            <div class="story-author">
+              <span class="author-name">张同学</span>
+              <span class="author-role">计算机系 · 2022级本科生</span>
+            </div>
+          </div>
+          <div class="story-card">
+            <p class="story-quote">“毕业离校行李箱装不下宿舍台灯和小风扇，在平台打包转让给了同楼层学妹，既不浪费又践行了低碳环保。”</p>
+            <div class="story-author">
+              <span class="author-name">周同学</span>
+              <span class="author-role">数字媒体艺术系 · 2021级</span>
             </div>
           </div>
         </div>
@@ -218,64 +338,145 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import {
   Reading,
   Goods,
+  Opportunity,
   Briefcase,
-  Upload,
+  Present,
+  Guide,
   ArrowRight,
-  Bell,
-  Location,
-  Clock
+  CircleCheckFilled
 } from '@element-plus/icons-vue'
 import ProductCard from '../components/ProductCard.vue'
-import { INITIAL_BANNERS, INITIAL_HEADLINES } from '../mock/initialData'
-import { useUserStore } from '../stores/user'
-import { useCartStore } from '../stores/cart'
+import { INITIAL_BANNERS } from '../mock/initialData'
 import { useMarketStore } from '../stores/market'
-import { getOrders } from '../services/storage'
 
 const router = useRouter()
-const userStore = useUserStore()
-const cartStore = useCartStore()
 const marketStore = useMarketStore()
+const activeTab = ref('books')
+
+onMounted(() => {
+  marketStore.loadAll()
+})
 
 const topBooks = computed(() => marketStore.books.slice(0, 4))
 const topGoods = computed(() => marketStore.goods.slice(0, 4))
-const topJobs = computed(() => marketStore.jobs.slice(0, 3))
-
-const myPublishedCount = computed(() => {
-  if (!userStore.studentId) return 0
-  const bCount = marketStore.books.filter(b => b.studentId === userStore.studentId).length
-  const gCount = marketStore.goods.filter(g => g.studentId === userStore.studentId).length
-  return bCount + gCount
-})
-
-const myOrdersCount = computed(() => {
-  if (!userStore.studentId) return 0
-  return getOrders(userStore.studentId).length
-})
-
-const handleBannerClick = (link) => {
-  if (link) router.push(link)
-}
+const topWants = computed(() => marketStore.wants.slice(0, 4))
 </script>
 
 <style scoped>
-/* Hero 区域 */
-.hero-section {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: var(--spacing-grid-gap, 24px);
-  margin-bottom: var(--spacing-grid-gap, 24px);
+.home-view {
+  padding-bottom: 60px;
 }
 
-.banner-carousel {
-  border-radius: var(--radius-xl, 20px);
+/* 1. Hero Showcase */
+.hero-showcase {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+  padding: 40px 0 30px;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  color: var(--text-regular);
+  font-weight: 500;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  display: inline-block;
+}
+
+.hero-headline {
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--text-main);
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  margin: 0 0 18px;
+}
+
+.hero-subtext {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 28px;
+  max-width: 540px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.primary-hero-btn {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-base);
+}
+
+.secondary-hero-btn {
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+  color: var(--text-main);
+  padding: 14px 22px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: var(--radius-base);
+}
+
+.hero-highlights {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.hl-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-regular);
+}
+
+/* Hero Right Banner */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.banner-wrapper {
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   border: 1px solid var(--border-color);
 }
 
@@ -290,369 +491,461 @@ const handleBannerClick = (link) => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.banner-slide:hover .banner-img {
-  transform: scale(1.03);
-}
-
-.banner-overlay {
+.banner-glass-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.3) 65%, transparent 100%);
+  padding: 24px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
   color: #ffffff;
-  padding: 30px 24px 22px;
-  backdrop-filter: blur(2px);
 }
 
-.banner-title {
-  font-size: 22px;
-  font-weight: 700;
+.slide-tag {
+  background: var(--primary-color);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
   margin-bottom: 6px;
-  letter-spacing: -0.3px;
+  display: inline-block;
 }
 
-.banner-subtitle {
-  font-size: 13px;
-  color: #cbd5e1;
-  line-height: 1.5;
-}
-
-.hero-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.user-quick-card {
-  background: var(--bg-card);
-  border-radius: var(--radius-xl, 20px);
-  padding: 22px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
-}
-
-.card-avatar-box {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.user-greeting {
-  display: flex;
-  flex-direction: column;
-}
-
-.greeting-text {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-.student-id-text {
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-top: 2px;
-}
-
-.quick-status-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  text-align: center;
-  padding: 14px 0;
-  background: var(--bg-card-subtle);
-  border-radius: var(--radius-base);
-  margin: 16px 0;
-}
-
-.status-item {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  transition: transform 0.2s;
-}
-
-.status-item:hover {
-  transform: translateY(-2px);
-}
-
-.status-num {
+.slide-title {
   font-size: 18px;
   font-weight: 700;
-  color: var(--primary-color);
-  font-feature-settings: 'tnum';
+  margin: 4px 0 2px;
 }
 
-.status-label {
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-.full-btn {
-  width: 100%;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  padding: 10px 0;
-}
-
-.safety-card {
-  background: var(--primary-light);
-  border-radius: var(--radius-lg);
-  padding: 16px 18px;
-  border: 1px solid var(--border-color);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.card-header-small {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--primary-color);
-  margin-bottom: 6px;
-}
-
-.card-desc {
+.slide-sub {
   font-size: 12px;
-  line-height: 1.6;
-  color: var(--text-regular);
+  opacity: 0.9;
+  margin: 0;
 }
 
-/* 跑马灯：简约胶囊风 */
-.headline-bar {
+.quick-access-strip {
   background: var(--bg-card);
-  border-radius: var(--radius-full);
-  padding: 0 18px;
-  height: 42px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 14px 20px;
   display: flex;
   align-items: center;
+  justify-content: space-around;
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
-  margin-bottom: var(--spacing-grid-gap, 24px);
-  gap: 14px;
 }
 
-.headline-tag {
+.strip-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-weight: 600;
-  color: var(--primary-color);
-  font-size: 13px;
-  border-right: 1px solid var(--border-color);
-  padding-right: 14px;
-  white-space: nowrap;
-}
-
-.toutiao-icon {
-  width: 18px;
-  height: 18px;
-}
-
-.headline-content {
-  flex: 1;
-  overflow: hidden;
-}
-
-.headline-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  line-height: 42px;
-  font-size: 13px;
-}
-
-.headline-badge {
-  background: var(--primary-light);
-  color: var(--primary-color);
-  font-size: 11px;
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
-  line-height: 16px;
-  font-weight: 600;
-}
-
-.headline-text {
-  flex: 1;
-  color: var(--text-regular);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.headline-date {
-  color: var(--text-secondary);
-  font-size: 12px;
-}
-
-/* 四大金刚分类：通透现代卡片 */
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-grid-gap, 20px);
-  margin-bottom: var(--spacing-section, 40px);
-}
-
-.category-card {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: 18px 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border: 1px solid var(--border-color);
+  gap: 12px;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.2s;
 }
 
-.category-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-hover);
-  border-color: var(--primary-color);
+.strip-item:hover {
+  opacity: 0.8;
 }
 
-.cat-icon-box {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-base);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.strip-icon {
+  font-size: 24px;
 }
 
-.cat-book { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-.cat-good { background: linear-gradient(135deg, #10b981, #047857); }
-.cat-job { background: linear-gradient(135deg, #f59e0b, #d97706); }
-.cat-pub { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
-
-.cat-info {
+.strip-text {
   display: flex;
   flex-direction: column;
 }
 
-.cat-title {
-  font-size: 15px;
+.strip-title {
+  font-size: 13px;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 2px;
 }
 
-.cat-desc {
-  font-size: 12px;
+.strip-sub {
+  font-size: 11px;
   color: var(--text-secondary);
 }
 
-/* 商品分区与网格：宽绰留白 */
-.market-section {
-  margin-bottom: var(--spacing-section, 44px);
+.strip-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--border-color);
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-grid-gap, 22px);
+/* 2. Metrics Bar */
+.metrics-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 30px 0 50px;
+  box-shadow: var(--shadow-sm);
 }
 
-/* 兼职卡片：现代极简卡片 */
-.jobs-row-grid {
+.metric-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.metric-num {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--primary-color);
+  font-family: 'DIN Alternate', sans-serif;
+}
+
+.metric-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.metric-sep {
+  width: 1px;
+  height: 40px;
+  background: var(--border-color);
+}
+
+/* 3. Portals Grid */
+.portals-section {
+  margin-bottom: 50px;
+}
+
+.section-title-box {
+  margin-bottom: 24px;
+}
+
+.sec-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 6px;
+}
+
+.sec-title.text-center {
+  text-align: center;
+}
+
+.sec-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.portals-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-grid-gap, 22px);
+  gap: 22px;
 }
 
-.job-card {
+.portal-card {
   background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: 20px;
   border: 1px solid var(--border-color);
-  cursor: pointer;
+  border-radius: var(--radius-lg);
+  padding: 26px;
   display: flex;
-  flex-direction: column;
+  gap: 18px;
+  cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.job-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-hover);
+.portal-card:hover {
+  transform: translateY(-4px);
   border-color: var(--primary-color);
+  box-shadow: var(--shadow-hover);
 }
 
-.job-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
-  gap: 10px;
-}
-
-.job-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-main);
-  line-height: 1.4;
-}
-
-.job-pay {
-  color: var(--price-color);
-  font-weight: 700;
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-.job-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  font-size: 12px;
-  color: var(--text-regular);
-  margin-bottom: 12px;
-}
-
-.job-meta span {
+.portal-icon-bg {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.job-req {
-  font-size: 12px;
+.icon-bg-blue { background: rgba(37, 99, 235, 0.12); color: #2563eb; }
+.icon-bg-emerald { background: rgba(16, 185, 129, 0.12); color: #059669; }
+.icon-bg-orange { background: rgba(234, 88, 12, 0.12); color: #ea580c; }
+.icon-bg-purple { background: rgba(124, 58, 237, 0.12); color: #7c3aed; }
+.icon-bg-teal { background: rgba(13, 148, 136, 0.12); color: #0d9488; }
+.icon-bg-indigo { background: rgba(79, 70, 229, 0.12); color: #4f46e5; }
+
+.portal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.portal-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 6px;
+}
+
+.portal-desc {
+  font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 14px;
-  height: 38px;
-  overflow: hidden;
+  line-height: 1.5;
+  margin: 0 0 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.job-footer {
+.portal-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-top: auto;
+}
+
+/* 4. Featured Section */
+.featured-section {
+  margin-bottom: 60px;
+}
+
+.featured-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.featured-tabs {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  gap: 4px;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background: var(--primary-color);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.product-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.home-wants-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.home-want-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.home-want-card:hover {
+  border-color: var(--primary-color);
+}
+
+.hw-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
-  padding-top: 12px;
+}
+
+.hw-budget {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--price-color);
+}
+
+.hw-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.hw-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hw-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  padding-top: 8px;
   border-top: 1px dashed var(--border-subtle);
 }
 
-.job-poster {
-  font-size: 12px;
+.hw-action {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.view-more-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* 5. Flow Section */
+.flow-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  margin-bottom: 60px;
+  box-shadow: var(--shadow-sm);
+}
+
+.flow-cards-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.flow-card {
+  flex: 1;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-base);
+  padding: 24px;
+  text-align: center;
+}
+
+.flow-index {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--primary-color);
+  opacity: 0.3;
+  margin-bottom: 6px;
+  font-family: 'DIN Alternate', sans-serif;
+}
+
+.flow-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 8px;
+}
+
+.flow-text {
+  font-size: 13px;
   color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.flow-arrow {
+  font-size: 24px;
+  color: var(--text-muted);
+}
+
+/* 6. Stories */
+.stories-section {
+  margin-bottom: 40px;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.story-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.story-quote {
+  font-size: 14px;
+  color: var(--text-regular);
+  line-height: 1.7;
+  font-style: italic;
+  margin: 0 0 16px;
+}
+
+.story-author {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.author-role {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 960px) {
+  .hero-showcase {
+    grid-template-columns: 1fr;
+  }
+  .portals-grid, .stories-grid {
+    grid-template-columns: 1fr;
+  }
+  .flow-cards-row {
+    flex-direction: column;
+  }
+  .flow-arrow {
+    display: none;
+  }
+  .home-wants-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

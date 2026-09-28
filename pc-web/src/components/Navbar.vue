@@ -25,13 +25,34 @@
         </div>
 
         <div class="top-right">
-          <span class="demo-tip">
-            测试学号: <b>20151621029</b> (密码: 666666)
-          </span>
-
-          <el-button link size="small" type="info" @click="handleResetData" title="一键恢复最初演示数据">
-            <el-icon><Refresh /></el-icon> 重置演示数据
-          </el-button>
+          <!-- 评审指引 Popover -->
+          <el-popover placement="bottom-end" :width="320" trigger="hover">
+            <template #reference>
+              <el-button link size="small" type="primary" class="demo-guide-link">
+                <el-icon><InfoFilled /></el-icon> 评审与演示指引
+              </el-button>
+            </template>
+            <div class="demo-popover-content">
+              <div class="popover-title">💡 全国数媒大赛评审快捷指引</div>
+              <p class="popover-desc">
+                纯静态前端架构，零后端零网络依赖，支持 GitHub Pages 全流程评审：
+              </p>
+              <div class="popover-meta-box">
+                <div class="popover-kv">
+                  <span class="kv-k">认证学号：</span>
+                  <code class="kv-v">20151621029</code>
+                </div>
+                <div class="popover-kv">
+                  <span class="kv-k">初始密码：</span>
+                  <code class="kv-v">666666</code>
+                </div>
+              </div>
+              <div class="popover-actions">
+                <el-button size="small" type="primary" @click="quickFillLogin">一键登录演示账号</el-button>
+                <el-button size="small" @click="handleResetData">重置演示数据</el-button>
+              </div>
+            </div>
+          </el-popover>
 
           <span class="divider">|</span>
 
@@ -58,8 +79,9 @@
           <template v-if="userStore.isLoggedIn">
             <el-dropdown @command="handleUserMenu">
               <span class="user-profile-badge">
-                <el-icon><UserFilled /></el-icon>
-                {{ userStore.nickName }} ({{ userStore.studentId }})
+                <el-avatar :size="20" src="./images/tabBar/mine.fill.png" class="nav-avatar" />
+                <span class="user-name-text">{{ userStore.nickName }}</span>
+                <el-tag size="small" type="success" effect="light" class="cert-pill">在校认证</el-tag>
                 <el-icon><ArrowDown /></el-icon>
               </span>
               <template #dropdown>
@@ -100,7 +122,7 @@
         <div class="search-area">
           <el-input
             v-model="searchKeyword"
-            placeholder="搜二手好书、期末教材、单车、数码、兼职..."
+            placeholder="搜二手好书、专业教材、单车、数码、求购..."
             class="header-search-input"
             clearable
             @keyup.enter="handleSearch"
@@ -120,7 +142,7 @@
             <a @click="quickSearch('考研英语')">考研英语</a>
             <a @click="quickSearch('自行车')">自行车</a>
             <a @click="quickSearch('台灯')">宿舍台灯</a>
-            <a @click="quickSearch('图书馆兼职')">家教兼职</a>
+            <a @click="router.push('/wants')">求购广场</a>
           </div>
         </div>
 
@@ -132,7 +154,7 @@
             :icon="Plus"
             @click="goToPublish"
           >
-            发布二手
+            发布物品 / 求购
           </el-button>
 
           <el-badge :value="cartStore.totalCount" :hidden="cartStore.totalCount === 0" class="cart-badge">
@@ -141,14 +163,14 @@
               :icon="ShoppingCart"
               @click="goToCart"
             >
-              购物车
+              预约清单
             </el-button>
           </el-badge>
         </div>
       </div>
     </div>
 
-    <!-- 底部主导航条 -->
+    <!-- 底部主导航条（完整清晰分页面体系） -->
     <nav class="nav-bar">
       <div class="pc-container nav-inner">
         <ul class="nav-list">
@@ -167,14 +189,24 @@
               <el-icon><Goods /></el-icon> 闲置杂货
             </router-link>
           </li>
+          <li :class="{ active: currentRoute === '/wants' }">
+            <router-link to="/wants">
+              <el-icon><Opportunity /></el-icon> 求购广场
+            </router-link>
+          </li>
           <li :class="{ active: currentRoute === '/jobs' }">
             <router-link to="/jobs">
               <el-icon><Briefcase /></el-icon> 校园兼职
             </router-link>
           </li>
-          <li :class="{ active: currentRoute === '/cart' }">
-            <router-link to="/cart">
-              <el-icon><ShoppingCart /></el-icon> 购物车与预订
+          <li :class="{ active: currentRoute === '/sustainability' }">
+            <router-link to="/sustainability">
+              <el-icon><Present /></el-icon> 绿色展馆
+            </router-link>
+          </li>
+          <li :class="{ active: currentRoute === '/guide' }">
+            <router-link to="/guide">
+              <el-icon><Guide /></el-icon> 面交指南
             </router-link>
           </li>
           <li :class="{ active: currentRoute === '/publish' }">
@@ -190,7 +222,7 @@
         </ul>
 
         <div class="nav-right-tip">
-          <el-tag type="success" size="small" effect="light">纯前端静态运行 · 支持 GitHub Pages</el-tag>
+          <el-tag type="success" size="small" effect="light">纯前端静态运行 · GitHub Pages 实时流转</el-tag>
         </div>
       </div>
     </nav>
@@ -217,7 +249,11 @@ import {
   Management,
   Brush,
   Sunny,
-  Moon
+  Moon,
+  InfoFilled,
+  Opportunity,
+  Present,
+  Guide
 } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import WeatherWidget from './WeatherWidget.vue'
@@ -236,6 +272,11 @@ const themeStore = useThemeStore()
 
 const searchKeyword = ref('')
 const currentRoute = computed(() => route.path)
+
+const quickFillLogin = () => {
+  userStore.login('20151621029', '666666')
+  ElMessage.success('已快捷登录演示账号：周同学')
+}
 
 const handleCampusChange = (campus) => {
   userStore.setCampus(campus)
@@ -285,7 +326,7 @@ const goToCart = () => {
 
 const handleResetData = () => {
   ElMessageBox.confirm(
-    '重置将清空您新增的发布与本地订单，恢复为系统内置的20+条初始高质量演示数据，确认重置吗？',
+    '重置将清空您新增的发布与本地订单，恢复为系统内置的高质量演示数据，确认重置吗？',
     '重置数据提示',
     {
       confirmButtonText: '确认重置',
@@ -351,12 +392,62 @@ const handleResetData = () => {
   color: var(--border-color);
 }
 
-.demo-tip {
-  color: var(--warning-color);
-  background: rgba(245, 158, 11, 0.1);
-  padding: 1px 8px;
-  border-radius: 4px;
-  border: 1px solid rgba(245, 158, 11, 0.2);
+.demo-guide-link {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.demo-popover-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popover-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.popover-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.popover-meta-box {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.popover-kv {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.kv-k {
+  color: var(--text-secondary);
+  width: 70px;
+}
+
+.kv-v {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.popover-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
 }
 
 .user-profile-badge {
@@ -364,8 +455,25 @@ const handleResetData = () => {
   color: var(--text-main);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-weight: 500;
+}
+
+.nav-avatar {
+  border: 1px solid var(--border-color);
+}
+
+.user-name-text {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cert-pill {
+  font-size: 10px;
+  height: 20px;
+  line-height: 18px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
 }
 
 /* 中部品牌与搜索 */
