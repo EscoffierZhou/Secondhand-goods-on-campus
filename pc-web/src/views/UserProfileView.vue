@@ -408,10 +408,10 @@ const handleLogout = () => {
 }
 
 .profile-auth-gate {
-  background: #ffffff;
+  background: var(--bg-card);
   padding: 60px;
-  border-radius: var(--radius-lg);
-  border: 1px solid #ebeef5;
+  border-radius: var(--radius-xl, 20px);
+  border: 1px solid var(--border-color);
 }
 
 .profile-layout {
@@ -427,10 +427,10 @@ const handleLogout = () => {
 }
 
 .student-card {
-  background: #ffffff;
-  border-radius: var(--radius-base);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl, 20px);
   padding: 24px;
-  border: 1px solid #ebeef5;
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
@@ -445,17 +445,17 @@ const handleLogout = () => {
 .student-name {
   font-size: 18px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-main);
   margin-bottom: 4px;
 }
 
 .student-id-badge {
-  background: #eff6ff;
+  background: var(--primary-light);
   color: var(--primary-color);
   font-size: 12px;
-  font-weight: 500;
-  padding: 2px 8px;
-  border-radius: 4px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
   margin-bottom: 10px;
 }
 
@@ -463,14 +463,14 @@ const handleLogout = () => {
   display: flex;
   flex-direction: column;
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
   gap: 2px;
 }
 
 .sidebar-divider {
   width: 100%;
   height: 1px;
-  background: #f1f5f9;
+  background: var(--border-subtle);
   margin: 16px 0;
 }
 
@@ -479,9 +479,9 @@ const handleLogout = () => {
 }
 
 .menu-box {
-  background: #ffffff;
-  border-radius: var(--radius-base);
-  border: 1px solid #ebeef5;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
   overflow: hidden;
 }
 
@@ -491,19 +491,19 @@ const handleLogout = () => {
   gap: 10px;
   padding: 14px 20px;
   font-size: 14px;
-  color: #475569;
+  color: var(--text-regular);
   cursor: pointer;
   border-left: 3px solid transparent;
   transition: all 0.2s;
 }
 
 .menu-item:hover {
-  background: #f8fafc;
+  background: var(--bg-card-subtle);
   color: var(--primary-color);
 }
 
 .menu-item.active {
-  background: #eff6ff;
+  background: var(--primary-light);
   color: var(--primary-color);
   font-weight: 600;
   border-left-color: var(--primary-color);
@@ -511,10 +511,10 @@ const handleLogout = () => {
 
 /* 主面板 */
 .profile-main-panel {
-  background: #ffffff;
-  border-radius: var(--radius-base);
-  padding: 26px;
-  border: 1px solid #ebeef5;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl, 20px);
+  padding: 28px;
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
   min-height: 480px;
 }
@@ -528,8 +528,8 @@ const handleLogout = () => {
 
 .panel-heading {
   font-size: 18px;
-  font-weight: 600;
-  color: #1e293b;
+  font-weight: 700;
+  color: var(--text-main);
   margin-bottom: 16px;
 }
 
@@ -546,22 +546,24 @@ const handleLogout = () => {
   align-items: center;
   gap: 16px;
   padding: 14px;
-  border: 1px solid #f1f5f9;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-base);
-  transition: background-color 0.2s;
+  background: var(--bg-card);
+  transition: all 0.2s;
 }
 
 .my-item-row:hover {
-  background-color: #fbfcfe;
+  background-color: var(--bg-card-subtle);
+  border-color: var(--border-color);
 }
 
 .my-item-img {
   width: 60px;
   height: 60px;
   object-fit: contain;
-  border-radius: 4px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
 }
 
 .my-item-details {
@@ -574,7 +576,7 @@ const handleLogout = () => {
 .my-item-name {
   font-size: 15px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-main);
   cursor: pointer;
 }
 
@@ -584,7 +586,7 @@ const handleLogout = () => {
 
 .my-item-desc {
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .my-item-actions {
@@ -600,9 +602,10 @@ const handleLogout = () => {
 }
 
 .order-card {
-  border: 1px solid #e2e8f0;
-  border-radius: var(--radius-base);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
   padding: 18px;
+  background: var(--bg-card);
 }
 
 .order-header {
@@ -610,7 +613,7 @@ const handleLogout = () => {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-subtle);
   margin-bottom: 12px;
 }
 
@@ -618,18 +621,18 @@ const handleLogout = () => {
   display: flex;
   gap: 16px;
   font-size: 13px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .order-id {
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-main);
 }
 
 .order-items-box {
-  background: #f8fafc;
+  background: var(--bg-card-subtle);
   padding: 12px;
-  border-radius: 6px;
+  border-radius: var(--radius-base);
   margin-bottom: 12px;
   display: flex;
   flex-direction: column;
@@ -648,17 +651,17 @@ const handleLogout = () => {
   height: 36px;
   object-fit: contain;
   border-radius: 4px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-color);
 }
 
 .order-item-title {
   flex: 1;
-  color: #334155;
+  color: var(--text-regular);
 }
 
 .order-item-price {
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-main);
 }
 
 .order-details-info {
@@ -666,7 +669,7 @@ const handleLogout = () => {
   grid-template-columns: repeat(2, 1fr);
   gap: 6px;
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
   margin-bottom: 12px;
 }
 
@@ -675,12 +678,12 @@ const handleLogout = () => {
   justify-content: space-between;
   align-items: center;
   padding-top: 10px;
-  border-top: 1px dashed #e2e8f0;
+  border-top: 1px dashed var(--border-subtle);
 }
 
 .order-total-price {
   font-size: 14px;
-  color: #1e293b;
+  color: var(--text-main);
 }
 
 .order-action-btns {
@@ -695,10 +698,10 @@ const handleLogout = () => {
 }
 
 .notice-card {
-  background: #f8fafc;
+  background: var(--bg-card-subtle);
   border-radius: var(--radius-base);
   padding: 16px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
 }
 
 .notice-top {
@@ -710,17 +713,17 @@ const handleLogout = () => {
 .notice-title {
   font-size: 14px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-main);
 }
 
 .notice-time {
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--text-secondary);
 }
 
 .notice-body {
   font-size: 13px;
   line-height: 1.6;
-  color: #475569;
+  color: var(--text-regular);
 }
 </style>

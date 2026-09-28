@@ -337,10 +337,10 @@ const copyPhone = (phone) => {
 }
 
 .detail-card {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  padding: 30px;
-  border: 1px solid #ebeef5;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl, 20px);
+  padding: 32px;
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
 }
 
@@ -361,9 +361,9 @@ const copyPhone = (phone) => {
   position: relative;
   width: 100%;
   height: 380px;
-  background-color: #f8fafc;
-  border-radius: var(--radius-base);
-  border: 1px solid #e2e8f0;
+  background-color: var(--bg-card-subtle);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -391,7 +391,7 @@ const copyPhone = (phone) => {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: #67c23a;
+  background: #10b981;
   color: #ffffff;
   padding: 3px 8px;
   font-size: 12px;
@@ -399,14 +399,14 @@ const copyPhone = (phone) => {
 }
 
 .security-box {
-  background: #f8fafc;
+  background: var(--bg-card-subtle);
   border-radius: var(--radius-base);
   padding: 14px;
-  border: 1px dashed #cbd5e1;
+  border: 1px dashed var(--border-color);
   display: flex;
   justify-content: space-around;
   font-size: 12px;
-  color: #475569;
+  color: var(--text-regular);
 }
 
 .sec-item {
@@ -424,22 +424,22 @@ const copyPhone = (phone) => {
 .book-title {
   font-size: 24px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-main);
   margin-bottom: 8px;
   line-height: 1.3;
 }
 
 .book-sub {
   font-size: 14px;
-  color: #64748b;
+  color: var(--text-secondary);
   margin-bottom: 20px;
 }
 
 .price-banner {
-  background: #fff7ed;
+  background: var(--bg-card-subtle);
   border-radius: var(--radius-base);
   padding: 16px 20px;
-  border: 1px solid #ffedd5;
+  border: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -454,7 +454,7 @@ const copyPhone = (phone) => {
 
 .price-label {
   font-size: 14px;
-  color: #9a3412;
+  color: var(--text-regular);
 }
 
 .price-val {
@@ -466,13 +466,13 @@ const copyPhone = (phone) => {
 
 .orig-price {
   font-size: 13px;
-  color: #94a3b8;
+  color: var(--text-secondary);
   text-decoration: line-through;
   margin-left: 10px;
 }
 
 .save-tag {
-  background: #ea580c;
+  background: var(--price-color);
   color: #ffffff;
   padding: 3px 10px;
   border-radius: 20px;
@@ -484,11 +484,12 @@ const copyPhone = (phone) => {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  background: #f8fafc;
+  background: var(--bg-card-subtle);
   padding: 16px;
   border-radius: var(--radius-base);
   margin-bottom: 20px;
   font-size: 13px;
+  border: 1px solid var(--border-subtle);
 }
 
 .spec-item {
@@ -497,23 +498,24 @@ const copyPhone = (phone) => {
 }
 
 .spec-label {
-  color: #64748b;
+  color: var(--text-secondary);
   width: 80px;
 }
 
 .spec-value {
-  color: #1e293b;
+  color: var(--text-main);
   font-weight: 500;
 }
 
 .seller-card {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-base);
   padding: 14px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  background: var(--bg-card);
 }
 
 .seller-header {
@@ -530,7 +532,7 @@ const copyPhone = (phone) => {
 .seller-name {
   font-size: 14px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-main);
 }
 
 .seller-cert {
@@ -543,7 +545,7 @@ const copyPhone = (phone) => {
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: #475569;
+  color: var(--text-regular);
 }
 
 .description-box {
@@ -553,18 +555,18 @@ const copyPhone = (phone) => {
 .box-title {
   font-size: 15px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-main);
   margin-bottom: 8px;
 }
 
 .desc-content {
   font-size: 14px;
   line-height: 1.6;
-  color: #475569;
-  background: #ffffff;
-  border: 1px solid #f1f5f9;
+  color: var(--text-regular);
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
   padding: 14px;
-  border-radius: 6px;
+  border-radius: var(--radius-base);
 }
 
 .action-buttons {
@@ -588,7 +590,7 @@ const copyPhone = (phone) => {
 }
 
 .not-found {
-  background: #ffffff;
+  background: var(--bg-card);
   padding: 60px;
   border-radius: var(--radius-base);
 }

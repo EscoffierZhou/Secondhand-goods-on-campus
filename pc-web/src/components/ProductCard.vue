@@ -165,20 +165,28 @@ const handleAddToCart = () => {
 
 <style scoped>
 .product-card {
-  background: #ffffff;
-  border-radius: var(--radius-base);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid #ebeef5;
+  border: 1px solid var(--border-color);
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-color);
 }
 
 .img-wrapper {
   position: relative;
   width: 100%;
-  height: 180px;
-  background-color: #f7f9fc;
+  height: 190px;
+  background-color: var(--bg-card-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -186,40 +194,46 @@ const handleAddToCart = () => {
 }
 
 .product-img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 88%;
+  max-height: 88%;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover .product-img {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .campus-tag {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  background: rgba(30, 104, 201, 0.85);
-  color: #fff;
+  top: 10px;
+  left: 10px;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
   font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 4px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
 }
 
 .textbook-tag {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(103, 194, 58, 0.9);
-  color: #fff;
+  top: 10px;
+  right: 10px;
+  background: rgba(16, 185, 129, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
   font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 4px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
 }
 
 .card-body {
-  padding: 12px;
+  padding: var(--card-inner-padding, 16px);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -229,35 +243,45 @@ const handleAddToCart = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.condition-badge {
+  font-size: 11px;
+  border-radius: 4px;
 }
 
 .views-text {
   font-size: 11px;
-  color: #909399;
+  color: var(--text-secondary);
 }
 
 .product-title {
   font-size: 14px;
   font-weight: 600;
-  color: #2c3e50;
-  line-height: 1.4;
-  height: 40px;
+  color: var(--text-main);
+  line-height: 1.5;
+  height: 42px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+
+.product-card:hover .product-title {
+  color: var(--primary-color);
 }
 
 .seller-row {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   font-size: 12px;
-  color: #909399;
-  margin-bottom: 10px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
 }
 
 .card-footer {
@@ -265,8 +289,8 @@ const handleAddToCart = () => {
   align-items: flex-end;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 6px;
-  border-top: 1px dashed #f0f2f5;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-subtle);
 }
 
 .price-box {
@@ -277,7 +301,7 @@ const handleAddToCart = () => {
 
 .original-price {
   font-size: 12px;
-  color: #c0c4cc;
+  color: var(--text-secondary);
   text-decoration: line-through;
   margin-left: 6px;
 }
@@ -288,11 +312,18 @@ const handleAddToCart = () => {
   gap: 6px;
 }
 
+.fav-btn {
+  transition: all 0.2s ease;
+}
+
 .add-cart-btn {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
+  transition: background-color 0.2s ease;
 }
+
 .add-cart-btn:hover {
   background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 </style>

@@ -243,20 +243,26 @@ const viewItemDetail = (item) => {
 }
 
 .stat-card {
-  background: #ffffff;
-  border-radius: var(--radius-base);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl, 20px);
   padding: 20px;
-  border: 1px solid #ebeef5;
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
   gap: 16px;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
 }
 
 .stat-icon {
   width: 50px;
   height: 50px;
-  border-radius: 10px;
+  border-radius: var(--radius-base);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -276,20 +282,21 @@ const viewItemDetail = (item) => {
 .stat-num {
   font-size: 24px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-main);
+  font-feature-settings: 'tnum';
 }
 
 .stat-label {
   font-size: 13px;
-  color: #64748b;
+  color: var(--text-secondary);
   margin-top: 2px;
 }
 
 .admin-main-card {
-  background: #ffffff;
-  border-radius: var(--radius-base);
-  padding: 24px;
-  border: 1px solid #ebeef5;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl, 20px);
+  padding: 26px;
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
 }
 
@@ -299,19 +306,19 @@ const viewItemDetail = (item) => {
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 16px;
-  border-bottom: 1px solid #f0f2f5;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .header-title {
   font-size: 18px;
-  font-weight: 600;
-  color: #1e293b;
+  font-weight: 700;
+  color: var(--text-main);
   margin-bottom: 4px;
 }
 
 .header-desc {
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .header-right {

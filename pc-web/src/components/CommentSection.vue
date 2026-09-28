@@ -187,10 +187,10 @@ const handleSendReply = (commentId) => {
 
 <style scoped>
 .comment-section {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  border: 1px solid #ebeef5;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl, 20px);
+  padding: 28px;
+  border: 1px solid var(--border-color);
   margin-top: 24px;
 }
 
@@ -199,7 +199,7 @@ const handleSendReply = (commentId) => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  border-bottom: 1px solid #f0f2f5;
+  border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 12px;
 }
 
@@ -211,24 +211,24 @@ const handleSendReply = (commentId) => {
 
 .section-title-text {
   font-size: 17px;
-  font-weight: 600;
-  color: #1e293b;
+  font-weight: 700;
+  color: var(--text-main);
 }
 
 .count-badge {
   font-size: 13px;
-  color: #94a3b8;
+  color: var(--text-secondary);
 }
 
 .privacy-tip-inline {
   font-size: 12px;
-  color: #10b981;
+  color: var(--success-color);
   display: flex;
   align-items: center;
   gap: 4px;
-  background: #ecfdf5;
-  padding: 2px 8px;
-  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
 }
 
 .quick-tags {
@@ -241,12 +241,13 @@ const handleSendReply = (commentId) => {
 
 .quick-title {
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .quick-tag {
   cursor: pointer;
   transition: all 0.2s;
+  border-radius: var(--radius-full);
 }
 
 .quick-tag:hover {
@@ -274,7 +275,7 @@ const handleSendReply = (commentId) => {
   display: flex;
   gap: 12px;
   padding-bottom: 14px;
-  border-bottom: 1px dashed #f1f5f9;
+  border-bottom: 1px dashed var(--border-subtle);
 }
 
 .comment-main {
@@ -290,28 +291,28 @@ const handleSendReply = (commentId) => {
 .comment-author {
   font-size: 13px;
   font-weight: 600;
-  color: #334155;
+  color: var(--text-main);
 }
 
 .comment-time {
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--text-secondary);
 }
 
 .comment-body {
   font-size: 14px;
-  color: #475569;
+  color: var(--text-regular);
   line-height: 1.5;
   margin-bottom: 8px;
 }
 
 .reply-box {
-  background: #f8fafc;
+  background: var(--bg-card-subtle);
   border-left: 3px solid var(--primary-color);
   padding: 8px 12px;
   border-radius: 4px;
   font-size: 13px;
-  color: #1e293b;
+  color: var(--text-main);
 }
 
 .reply-tag {
@@ -334,6 +335,6 @@ const handleSendReply = (commentId) => {
   text-align: center;
   padding: 24px;
   font-size: 13px;
-  color: #94a3b8;
+  color: var(--text-secondary);
 }
 </style>

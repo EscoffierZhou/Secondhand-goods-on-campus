@@ -41,6 +41,20 @@
 
           <span class="divider">|</span>
 
+          <el-button link size="small" type="primary" @click="themeStore.openDrawer" title="自定义网页主题色彩与布局间距">
+            <el-icon><Brush /></el-icon> 配色风格
+          </el-button>
+
+          <span class="divider">|</span>
+
+          <el-button link size="small" @click="themeStore.toggleDark" :title="themeStore.isDark ? '切换至浅色模式' : '切换至深色模式'">
+            <el-icon v-if="themeStore.isDark"><Sunny /></el-icon>
+            <el-icon v-else><Moon /></el-icon>
+            {{ themeStore.isDark ? '浅色' : '深色' }}
+          </el-button>
+
+          <span class="divider">|</span>
+
           <template v-if="userStore.isLoggedIn">
             <el-dropdown @command="handleUserMenu">
               <span class="user-profile-badge">
@@ -200,13 +214,17 @@ import {
   Upload,
   User,
   Refresh,
-  Management
+  Management,
+  Brush,
+  Sunny,
+  Moon
 } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import WeatherWidget from './WeatherWidget.vue'
 import { useUserStore } from '../stores/user'
 import { useCartStore } from '../stores/cart'
 import { useMarketStore } from '../stores/market'
+import { useThemeStore } from '../stores/theme'
 import { resetAllData } from '../services/storage'
 
 const route = useRoute()
@@ -214,6 +232,7 @@ const router = useRouter()
 const userStore = useUserStore()
 const cartStore = useCartStore()
 const marketStore = useMarketStore()
+const themeStore = useThemeStore()
 
 const searchKeyword = ref('')
 const currentRoute = computed(() => route.path)
@@ -284,20 +303,21 @@ const handleResetData = () => {
 
 <style scoped>
 .navbar-wrapper {
-  background: #ffffff;
-  border-bottom: 1px solid #e4e7ed;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* 顶部状态栏 */
 .top-bar {
-  background-color: #f7f9fa;
-  border-bottom: 1px solid #ebeef5;
+  background-color: var(--bg-card-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   font-size: 12px;
-  color: #606266;
+  color: var(--text-regular);
   height: 34px;
 }
 
@@ -315,7 +335,7 @@ const handleResetData = () => {
 }
 
 .campus-label {
-  color: #909399;
+  color: var(--text-secondary);
 }
 
 .campus-selector {
@@ -328,20 +348,20 @@ const handleResetData = () => {
 }
 
 .divider {
-  color: #dcdfe6;
+  color: var(--border-color);
 }
 
 .demo-tip {
-  color: #e6a23c;
-  background: #fdf6ec;
+  color: var(--warning-color);
+  background: rgba(245, 158, 11, 0.1);
   padding: 1px 8px;
   border-radius: 4px;
-  border: 1px solid #faecd8;
+  border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
 .user-profile-badge {
   cursor: pointer;
-  color: #303133;
+  color: var(--text-main);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -350,7 +370,7 @@ const handleResetData = () => {
 
 /* 中部品牌与搜索 */
 .main-header {
-  padding: 16px 0;
+  padding: 14px 0;
 }
 
 .header-inner {
@@ -368,15 +388,16 @@ const handleResetData = () => {
 }
 
 .logo-icon {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, #1E68C9, #3a8ee6);
-  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  background: var(--primary-color);
+  border-radius: var(--radius-base);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  box-shadow: 0 4px 10px rgba(30, 104, 201, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: background-color 0.3s ease;
 }
 
 .logo-text {
@@ -385,22 +406,22 @@ const handleResetData = () => {
 }
 
 .brand-title {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
-  color: #1e293b;
-  letter-spacing: 0.5px;
+  color: var(--text-main);
+  letter-spacing: 0.3px;
 }
 
 .brand-sub {
   font-size: 10px;
-  color: #94a3b8;
+  color: var(--text-secondary);
   letter-spacing: 0.8px;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .search-area {
   flex: 1;
-  max-width: 540px;
+  max-width: 520px;
 }
 
 .header-search-input :deep(.el-input-group__append) {
@@ -409,6 +430,7 @@ const handleResetData = () => {
   border-color: var(--primary-color);
   padding: 0 20px;
   font-weight: 500;
+  transition: background-color 0.3s ease;
 }
 
 .search-btn {
@@ -418,7 +440,7 @@ const handleResetData = () => {
 .search-hot-tags {
   margin-top: 6px;
   font-size: 12px;
-  color: #909399;
+  color: var(--text-secondary);
   display: flex;
   gap: 10px;
 }
@@ -442,22 +464,27 @@ const handleResetData = () => {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
   font-weight: 500;
-  padding: 10px 20px;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
 }
 
 .publish-btn:hover {
   background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
 .cart-btn {
-  border-color: #dcdfe6;
-  color: #606266;
+  border-color: var(--border-color);
+  color: var(--text-regular);
+  background: var(--bg-card);
 }
 
 /* 导航栏 */
 .nav-bar {
-  background-color: #ffffff;
-  border-top: 1px solid #f0f2f5;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-subtle);
+  transition: background-color 0.3s ease;
 }
 
 .nav-inner {
@@ -469,17 +496,17 @@ const handleResetData = () => {
 .nav-list {
   display: flex;
   list-style: none;
-  gap: 4px;
+  gap: 6px;
 }
 
 .nav-list li a {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 18px;
-  font-size: 15px;
+  padding: 10px 16px;
+  font-size: 14px;
   font-weight: 500;
-  color: #334155;
+  color: var(--text-regular);
   transition: all 0.2s;
   border-bottom: 2px solid transparent;
 }
@@ -491,5 +518,6 @@ const handleResetData = () => {
 .nav-list li.active a {
   color: var(--primary-color);
   border-bottom-color: var(--primary-color);
+  font-weight: 600;
 }
 </style>

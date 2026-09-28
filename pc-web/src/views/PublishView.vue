@@ -869,10 +869,10 @@ const applyQuickStyle = (type, styleKey) => {
 }
 
 .publish-card {
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: var(--radius-lg);
   padding: 30px;
-  border: 1px solid #ebeef5;
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
 }
 
@@ -888,13 +888,13 @@ const applyQuickStyle = (type, styleKey) => {
 .publish-main-title {
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-main);
   margin-bottom: 6px;
 }
 
 .publish-sub-title {
   font-size: 13px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .form-container {
@@ -904,7 +904,7 @@ const applyQuickStyle = (type, styleKey) => {
 .unit-text {
   margin-left: 8px;
   font-size: 13px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .img-uploader-row {
@@ -918,7 +918,7 @@ const applyQuickStyle = (type, styleKey) => {
   height: 50px;
   border-radius: 6px;
   overflow: hidden;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-color);
 }
 
 .img-preview-thumb img {
@@ -932,8 +932,8 @@ const applyQuickStyle = (type, styleKey) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
   padding: 8px 14px;
   border-radius: 6px;
   margin-bottom: 18px;
@@ -969,7 +969,7 @@ const applyQuickStyle = (type, styleKey) => {
 
 .field-tip {
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .quick-style-tags {
@@ -982,7 +982,7 @@ const applyQuickStyle = (type, styleKey) => {
 
 .tag-title {
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .style-chip {
@@ -991,7 +991,7 @@ const applyQuickStyle = (type, styleKey) => {
 }
 
 .style-chip:hover {
-  background-color: #eff6ff;
+  background-color: var(--primary-light);
   color: var(--primary-color);
   border-color: var(--primary-color);
 }
@@ -1004,12 +1004,12 @@ const applyQuickStyle = (type, styleKey) => {
 }
 
 .ai-modal-header {
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 10px;
 }
 
 .ai-model-tag {
-  background: #eff6ff;
+  background: var(--primary-light);
   color: var(--primary-color);
   font-size: 11px;
   font-weight: 600;
@@ -1021,21 +1021,21 @@ const applyQuickStyle = (type, styleKey) => {
 
 .ai-modal-desc {
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
   margin: 0;
 }
 
 .valuation-card {
-  background: #f8fafc;
+  background: var(--bg-card-subtle);
   border-radius: 8px;
   padding: 16px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
 }
 
 .valuation-target {
   font-size: 14px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-main);
   margin-bottom: 8px;
 }
 
@@ -1043,22 +1043,22 @@ const applyQuickStyle = (type, styleKey) => {
   display: flex;
   gap: 16px;
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
   margin-bottom: 16px;
 }
 
 .valuation-result-box {
   display: flex;
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: 8px;
   padding: 16px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-color);
   margin-bottom: 14px;
 }
 
 .result-price-col {
   flex: 1;
-  border-right: 1px solid #e2e8f0;
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -1066,7 +1066,7 @@ const applyQuickStyle = (type, styleKey) => {
 
 .sub-label {
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .big-price {
@@ -1092,11 +1092,11 @@ const applyQuickStyle = (type, styleKey) => {
 .range-val {
   font-size: 16px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-main);
 }
 
 .valuation-reasoning {
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: 6px;
   padding: 12px;
   border-left: 3px solid #16a34a;
@@ -1112,7 +1112,7 @@ const applyQuickStyle = (type, styleKey) => {
 .reason-text {
   font-size: 12px;
   line-height: 1.6;
-  color: #334155;
+  color: var(--text-regular);
   margin: 0;
 }
 
@@ -1125,7 +1125,7 @@ const applyQuickStyle = (type, styleKey) => {
 .select-label {
   font-size: 13px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-main);
 }
 
 .preview-copy-box {
@@ -1138,7 +1138,7 @@ const applyQuickStyle = (type, styleKey) => {
   align-items: center;
   font-size: 13px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-main);
   margin-bottom: 6px;
 }
 </style>

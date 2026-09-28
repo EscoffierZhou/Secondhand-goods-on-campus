@@ -268,14 +268,15 @@ const handleBannerClick = (link) => {
 .hero-section {
   display: grid;
   grid-template-columns: 1fr 320px;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: var(--spacing-grid-gap, 24px);
+  margin-bottom: var(--spacing-grid-gap, 24px);
 }
 
 .banner-carousel {
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl, 20px);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 .banner-slide {
@@ -289,6 +290,11 @@ const handleBannerClick = (link) => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.banner-slide:hover .banner-img {
+  transform: scale(1.03);
 }
 
 .banner-overlay {
@@ -296,20 +302,23 @@ const handleBannerClick = (link) => {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.3) 65%, transparent 100%);
   color: #ffffff;
-  padding: 24px 20px;
+  padding: 30px 24px 22px;
+  backdrop-filter: blur(2px);
 }
 
 .banner-title {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 6px;
+  letter-spacing: -0.3px;
 }
 
 .banner-subtitle {
-  font-size: 14px;
-  color: #e2e8f0;
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.5;
 }
 
 .hero-sidebar {
@@ -319,11 +328,12 @@ const handleBannerClick = (link) => {
 }
 
 .user-quick-card {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  padding: 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl, 20px);
+  padding: 22px;
   box-shadow: var(--shadow-sm);
-  border: 1px solid #ebeef5;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 
 .card-avatar-box {
@@ -331,7 +341,7 @@ const handleBannerClick = (link) => {
   align-items: center;
   gap: 14px;
   padding-bottom: 16px;
-  border-bottom: 1px solid #f0f2f5;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .user-greeting {
@@ -340,14 +350,14 @@ const handleBannerClick = (link) => {
 }
 
 .greeting-text {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1e293b;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
 }
 
 .student-id-text {
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--text-secondary);
   margin-top: 2px;
 }
 
@@ -355,68 +365,82 @@ const handleBannerClick = (link) => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   text-align: center;
-  padding: 16px 0;
+  padding: 14px 0;
+  background: var(--bg-card-subtle);
+  border-radius: var(--radius-base);
+  margin: 16px 0;
 }
 
 .status-item {
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
+  transition: transform 0.2s;
+}
+
+.status-item:hover {
+  transform: translateY(-2px);
 }
 
 .status-num {
   font-size: 18px;
   font-weight: 700;
   color: var(--primary-color);
+  font-feature-settings: 'tnum';
 }
 
 .status-label {
-  font-size: 12px;
-  color: #64748b;
+  font-size: 11px;
+  color: var(--text-secondary);
 }
 
 .full-btn {
   width: 100%;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  padding: 10px 0;
 }
 
 .safety-card {
-  background: #ffffff;
+  background: var(--primary-light);
   border-radius: var(--radius-lg);
-  padding: 16px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid #ebeef5;
+  padding: 16px 18px;
+  border: 1px solid var(--border-color);
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .card-header-small {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  color: #334155;
-  margin-bottom: 8px;
+  color: var(--primary-color);
+  margin-bottom: 6px;
 }
 
 .card-desc {
   font-size: 12px;
   line-height: 1.6;
-  color: #64748b;
+  color: var(--text-regular);
 }
 
-/* 跑马灯 */
+/* 跑马灯：简约胶囊风 */
 .headline-bar {
-  background: #ffffff;
-  border-radius: var(--radius-base);
-  padding: 0 16px;
-  height: 48px;
+  background: var(--bg-card);
+  border-radius: var(--radius-full);
+  padding: 0 18px;
+  height: 42px;
   display: flex;
   align-items: center;
   box-shadow: var(--shadow-sm);
-  border: 1px solid #ebeef5;
-  margin-bottom: 24px;
-  gap: 16px;
+  border: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-grid-gap, 24px);
+  gap: 14px;
 }
 
 .headline-tag {
@@ -424,16 +448,16 @@ const handleBannerClick = (link) => {
   align-items: center;
   gap: 6px;
   font-weight: 600;
-  color: #e6a23c;
-  font-size: 14px;
-  border-right: 1px solid #ebeef5;
-  padding-right: 16px;
+  color: var(--primary-color);
+  font-size: 13px;
+  border-right: 1px solid var(--border-color);
+  padding-right: 14px;
   white-space: nowrap;
 }
 
 .toutiao-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .headline-content {
@@ -445,60 +469,70 @@ const handleBannerClick = (link) => {
   display: flex;
   align-items: center;
   gap: 10px;
-  line-height: 36px;
+  line-height: 42px;
   font-size: 13px;
 }
 
 .headline-badge {
-  background: #fdf6ec;
-  color: #e6a23c;
-  border: 1px solid #faecd8;
+  background: var(--primary-light);
+  color: var(--primary-color);
   font-size: 11px;
-  padding: 0 6px;
-  border-radius: 4px;
-  line-height: 18px;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  line-height: 16px;
+  font-weight: 600;
 }
 
 .headline-text {
   flex: 1;
-  color: #334155;
+  color: var(--text-regular);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .headline-date {
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 12px;
 }
 
-/* 四大金刚分类 */
+/* 四大金刚分类：通透现代卡片 */
 .category-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 30px;
+  gap: var(--spacing-grid-gap, 20px);
+  margin-bottom: var(--spacing-section, 40px);
 }
 
 .category-card {
-  background: #ffffff;
-  border-radius: var(--radius-base);
-  padding: 18px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  border: 1px solid #ebeef5;
+  gap: 16px;
+  border: 1px solid var(--border-color);
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-color);
 }
 
 .cat-icon-box {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-base);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .cat-book { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
@@ -506,64 +540,77 @@ const handleBannerClick = (link) => {
 .cat-job { background: linear-gradient(135deg, #f59e0b, #d97706); }
 .cat-pub { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
 
+.cat-info {
+  display: flex;
+  flex-direction: column;
+}
+
 .cat-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 2px;
 }
 
 .cat-desc {
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
-/* 商品网格 */
+/* 商品分区与网格：宽绰留白 */
 .market-section {
-  margin-bottom: 36px;
+  margin-bottom: var(--spacing-section, 44px);
 }
 
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  gap: var(--spacing-grid-gap, 22px);
 }
 
-/* 兼职卡片 */
+/* 兼职卡片：现代极简卡片 */
 .jobs-row-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: var(--spacing-grid-gap, 22px);
 }
 
 .job-card {
-  background: #ffffff;
-  border-radius: var(--radius-base);
-  padding: 18px;
-  border: 1px solid #ebeef5;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  border: 1px solid var(--border-color);
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.job-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-color);
 }
 
 .job-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 10px;
-  gap: 8px;
+  margin-bottom: 12px;
+  gap: 10px;
 }
 
 .job-title {
   font-size: 15px;
-  font-weight: 600;
-  color: #1e293b;
+  font-weight: 700;
+  color: var(--text-main);
   line-height: 1.4;
 }
 
 .job-pay {
   color: var(--price-color);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 14px;
   white-space: nowrap;
 }
@@ -571,24 +618,24 @@ const handleBannerClick = (link) => {
 .job-meta {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   font-size: 12px;
-  color: #64748b;
-  margin-bottom: 10px;
+  color: var(--text-regular);
+  margin-bottom: 12px;
 }
 
 .job-meta span {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .job-req {
   font-size: 12px;
-  color: #94a3b8;
-  line-height: 1.5;
+  color: var(--text-secondary);
+  line-height: 1.6;
   margin-bottom: 14px;
-  height: 36px;
+  height: 38px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -600,12 +647,12 @@ const handleBannerClick = (link) => {
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-  padding-top: 10px;
-  border-top: 1px dashed #f0f2f5;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-subtle);
 }
 
 .job-poster {
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 </style>

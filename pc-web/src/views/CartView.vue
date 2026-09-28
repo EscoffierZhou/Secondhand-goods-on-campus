@@ -325,17 +325,17 @@ const handleConfirmCheckout = () => {
 
 .cart-tip {
   font-size: 13px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .cart-tabs-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ffffff;
+  background: var(--bg-card);
   padding: 12px 20px;
   border-radius: var(--radius-base) var(--radius-base) 0 0;
-  border: 1px solid #ebeef5;
+  border: 1px solid var(--border-color);
   border-bottom: none;
 }
 
@@ -346,7 +346,7 @@ const handleConfirmCheckout = () => {
 
 .cart-tab {
   font-size: 14px;
-  color: #64748b;
+  color: var(--text-secondary);
   cursor: pointer;
   padding-bottom: 4px;
   border-bottom: 2px solid transparent;
@@ -359,20 +359,22 @@ const handleConfirmCheckout = () => {
 }
 
 .cart-table-card {
-  background: #ffffff;
-  border: 1px solid #ebeef5;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   box-shadow: var(--shadow-sm);
   margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .table-header {
   display: flex;
   align-items: center;
-  background: #f8fafc;
+  background: var(--bg-card-subtle);
   padding: 12px 20px;
   font-size: 13px;
-  color: #64748b;
-  border-bottom: 1px solid #e2e8f0;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .col-chk { width: 80px; }
@@ -386,12 +388,12 @@ const handleConfirmCheckout = () => {
   display: flex;
   align-items: center;
   padding: 18px 20px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-color);
   transition: background-color 0.2s;
 }
 
 .cart-row:hover {
-  background-color: #fbfcfe;
+  background-color: var(--bg-card-subtle);
 }
 
 .item-info-box {
@@ -406,8 +408,8 @@ const handleConfirmCheckout = () => {
   height: 60px;
   object-fit: contain;
   border-radius: 6px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
 }
 
 .item-text {
@@ -418,7 +420,7 @@ const handleConfirmCheckout = () => {
 
 .item-title {
   font-size: 14px;
-  color: #1e293b;
+  color: var(--text-main);
   line-height: 1.4;
 }
 
@@ -429,7 +431,7 @@ const handleConfirmCheckout = () => {
 
 .campus-tag-table {
   font-size: 13px;
-  color: #475569;
+  color: var(--text-secondary);
 }
 
 .price-val-table {
@@ -442,21 +444,21 @@ const handleConfirmCheckout = () => {
 .seller-name-table {
   display: block;
   font-size: 13px;
-  color: #1e293b;
+  color: var(--text-main);
   font-weight: 500;
 }
 
 .seller-phone-table {
   display: block;
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 /* 底部结算栏 */
 .cart-bottom-bar {
-  background: #ffffff;
-  border: 1px solid #ebeef5;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
   border-radius: var(--radius-base);
   padding: 16px 24px;
   display: flex;
@@ -487,7 +489,7 @@ const handleConfirmCheckout = () => {
 
 .total-label {
   font-size: 14px;
-  color: #475569;
+  color: var(--text-secondary);
 }
 
 .total-price-number {
@@ -506,10 +508,10 @@ const handleConfirmCheckout = () => {
 }
 
 .empty-state {
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: var(--radius-base);
   padding: 60px;
-  border: 1px solid #ebeef5;
+  border: 1px solid var(--border-color);
 }
 
 .empty-actions {
@@ -519,16 +521,16 @@ const handleConfirmCheckout = () => {
 }
 
 .order-summary-box {
-  background: #f8fafc;
+  background: var(--bg-card-subtle);
   padding: 14px;
   border-radius: 6px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   margin-bottom: 20px;
 }
 
 .summary-title {
   font-size: 13px;
-  color: #475569;
+  color: var(--text-secondary);
   margin-bottom: 8px;
 }
 
@@ -543,7 +545,7 @@ const handleConfirmCheckout = () => {
   justify-content: space-between;
   font-size: 13px;
   padding: 4px 0;
-  color: #334155;
+  color: var(--text-regular);
 }
 
 .summary-total {
@@ -551,8 +553,8 @@ const handleConfirmCheckout = () => {
   justify-content: flex-end;
   align-items: baseline;
   padding-top: 8px;
-  border-top: 1px dashed #cbd5e1;
+  border-top: 1px dashed var(--border-color);
   font-size: 14px;
-  color: #1e293b;
+  color: var(--text-main);
 }
 </style>

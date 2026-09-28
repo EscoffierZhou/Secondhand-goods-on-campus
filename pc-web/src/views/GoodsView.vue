@@ -167,34 +167,34 @@ const resetFilters = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .items-total-tag {
   font-size: 13px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .filter-card {
-  background: #ffffff;
-  border-radius: var(--radius-base);
-  padding: 18px 20px;
-  border: 1px solid #ebeef5;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl, 20px);
+  padding: 22px 24px;
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
-  margin-bottom: 24px;
+  margin-bottom: var(--spacing-grid-gap, 24px);
 }
 
 .filter-row {
   display: flex;
   align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px dashed #f0f2f5;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--border-subtle);
   font-size: 13px;
 }
 
 .filter-label {
   width: 90px;
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-weight: 500;
   flex-shrink: 0;
 }
@@ -206,39 +206,41 @@ const resetFilters = () => {
 }
 
 .filter-opt {
-  padding: 3px 10px;
-  border-radius: 4px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
   cursor: pointer;
-  color: #475569;
+  color: var(--text-regular);
   transition: all 0.2s;
+  font-size: 13px;
 }
 
 .filter-opt:hover {
   color: var(--primary-color);
+  background-color: var(--primary-light);
 }
 
 .filter-opt.active {
   background-color: var(--primary-color);
   color: #ffffff;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .filter-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 14px;
+  padding-top: 16px;
 }
 
 .sort-tabs {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   font-size: 13px;
 }
 
 .sort-tab {
   cursor: pointer;
-  color: #64748b;
+  color: var(--text-secondary);
   transition: color 0.2s;
 }
 
@@ -248,19 +250,19 @@ const resetFilters = () => {
 
 .sort-tab.active {
   color: var(--primary-color);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .goods-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: var(--spacing-grid-gap, 22px);
 }
 
 .empty-state {
-  background: #ffffff;
-  border-radius: var(--radius-base);
-  padding: 40px;
-  border: 1px solid #ebeef5;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl, 20px);
+  padding: 48px;
+  border: 1px solid var(--border-color);
 }
 </style>
