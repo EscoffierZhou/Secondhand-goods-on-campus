@@ -1,6 +1,6 @@
 //app.js
 var Bmob = require('utils/bmob.js');
-Bmob.initialize("59c6af950c7ae5ae07df0e5291cdf708", "1be7b1ea080e159e483a330dba10cd07");
+Bmob.initialize("YOUR_BMOB_APP_ID_PLACEHOLDER", "YOUR_BMOB_REST_KEY_PLACEHOLDER");
 App({
   onLaunch: function () {
     var user = new Bmob.User();//开始注册用户

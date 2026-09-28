@@ -10,7 +10,7 @@ Page({
     onLoad: function() {
         var that = this;
         var BMap = new bmap.BMapWX({
-          ak: 'zuwiVmIUj822mmW6psamM888QLz8Q5wF'
+          ak: 'YOUR_BAIDU_MAP_AK'
         });
         var fail = function(data) {
             console.log('fail!!!!')
